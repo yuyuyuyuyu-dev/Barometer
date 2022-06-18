@@ -25,9 +25,9 @@ class MainActivity : AppCompatActivity() {
             this, MainViewModel.Factory(getSystemService(Context.SENSOR_SERVICE) as SensorManager)
         )[MainViewModel::class.java]
 
-        viewModel.airPressureLiveData.observe(this, Observer<String> { airPressure ->
+        viewModel.airPressureLiveData.observe(this) { airPressure ->
             binding.airPressureText.text = "${airPressure} hPa"
-        })
+        }
     }
 
     override fun onResume() {
