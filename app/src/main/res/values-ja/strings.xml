@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Barometer</string>
+    <string name="failed_to_get_barometer_data">気圧センサーの値を取得できませんでした。</string>
+</resources>
