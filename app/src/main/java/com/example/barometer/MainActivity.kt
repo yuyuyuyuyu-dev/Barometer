@@ -1,11 +1,10 @@
 package com.example.barometer
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.barometer.databinding.ActivityMainBinding
 
@@ -15,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         )[MainViewModel::class.java]
 
         viewModel.airPressureLiveData.observe(this) { airPressure ->
-            binding.airPressureText.text = "${airPressure} hPa"
+            binding.airPressureText.text = "$airPressure hPa"
         }
     }
 
