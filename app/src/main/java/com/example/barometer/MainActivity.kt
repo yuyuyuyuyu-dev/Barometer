@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         )[MainViewModel::class.java]
 
         viewModel.airPressureLiveData.observe(this) { airPressure ->
-            binding.airPressureText.text = "$airPressure hPa"
+            binding.airPressureText.text = "${airPressure.padEnd(10, '0')} hPa"
         }
     }
 
