@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Barometer</string>
-    <string name="failed_to_get_barometer_data">Failed to get barometer data.</string>
+    <string name="could_not_get_barometric_sensor_value">Could not get barometric sensor value.</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.barometer
+package io.github.yukoba.barometer
 
 import org.junit.Test
 

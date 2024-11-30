@@ -1,4 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Barometer</string>
-    <string name="failed_to_get_barometer_data">気圧センサーの値を取得できませんでした。</string>
+    <string name="app_name">気圧計</string>
+    <string name="could_not_get_barometric_sensor_value">気圧センサーの値を取得できませんでした。</string>
 </resources>
