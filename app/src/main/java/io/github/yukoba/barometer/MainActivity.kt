@@ -31,7 +31,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
                         TopAppBar(title = {
-                            Text(stringResource(R.string.app_name))
+                            Text(
+                                text = stringResource(R.string.app_name),
+                            )
                         })
                     },
                     containerColor = MaterialTheme.colorScheme.background,

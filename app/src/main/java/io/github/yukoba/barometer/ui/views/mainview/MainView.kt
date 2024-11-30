@@ -9,7 +9,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.github.yukoba.barometer.R
 
@@ -30,7 +29,6 @@ fun MainView(
             } else {
                 stringResource(R.string.could_not_get_barometric_sensor_value)
             },
-            fontSize = 34.sp,
         )
     }
 }
