@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Barometer</string>
     <string name="could_not_get_barometric_sensor_value">Could not get barometric sensor value.</string>
+    <string name="third_party_licenses">Third party licenses</string>
 </resources>
