@@ -2,8 +2,6 @@ package io.github.yukoba.barometer.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -20,7 +18,8 @@ import androidx.navigation.compose.rememberNavController
 import io.github.yukoba.barometer.ui.components.TopAppBar
 import io.github.yukoba.barometer.ui.features.barometer.BarometerViewModel
 import io.github.yukoba.barometer.ui.features.barometer.screens.BarometerScreen
-import io.github.yukoba.barometer.ui.features.thirdpartylicenses.screens.ThirdPartyLicensesView
+import io.github.yukoba.barometer.ui.features.thirdpartylicenses.screens.ThirdPartyLicenseScreen
+import io.github.yukoba.barometer.ui.features.thirdpartylicenses.screens.ThirdPartyLicensesScreen
 import io.github.yukoba.barometer.ui.types.NavigateDestination
 
 @Composable
@@ -45,7 +44,9 @@ fun App(
                     navController.navigateUp()
                 },
                 onNavigateThirdPartyLicensesButtonClick = {
-                    navController.navigate(NavigateDestination.ThirdPartyLicenses.name)
+                    if (currentScreen != NavigateDestination.ThirdPartyLicenses) {
+                        navController.navigate(NavigateDestination.ThirdPartyLicenses.name)
+                    }
                 },
             )
         },
@@ -56,7 +57,6 @@ fun App(
             startDestination = NavigateDestination.Main.name,
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ) {
             composable(route = NavigateDestination.Main.name) {
@@ -64,7 +64,15 @@ fun App(
             }
 
             composable(route = NavigateDestination.ThirdPartyLicenses.name) {
-                ThirdPartyLicensesView()
+                ThirdPartyLicensesScreen(
+                    onLicenseCardClick = {
+                        navController.navigate(NavigateDestination.ThirdPartyLicense.name)
+                    },
+                )
+            }
+
+            composable(route = NavigateDestination.ThirdPartyLicense.name) {
+                ThirdPartyLicenseScreen()
             }
         }
     }

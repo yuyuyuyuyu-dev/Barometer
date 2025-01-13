@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import io.github.yukoba.barometer.R
 
@@ -24,8 +25,10 @@ fun TopAppBar(
     navigateBackIsPossible: Boolean,
     onNavigateBackButtonClick: () -> Unit,
     onNavigateThirdPartyLicensesButtonClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) = androidx.compose.material3.TopAppBar(
     title = { Text(title) },
+    modifier = modifier,
     navigationIcon = {
         if (navigateBackIsPossible) {
             IconButton(
