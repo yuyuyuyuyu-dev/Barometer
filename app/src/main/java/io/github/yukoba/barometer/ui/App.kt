@@ -20,6 +20,7 @@ import io.github.yukoba.barometer.ui.features.barometer.BarometerViewModel
 import io.github.yukoba.barometer.ui.features.barometer.screens.BarometerScreen
 import io.github.yukoba.barometer.ui.features.thirdpartylicenses.screens.ThirdPartyLicenseScreen
 import io.github.yukoba.barometer.ui.features.thirdpartylicenses.screens.ThirdPartyLicensesScreen
+import io.github.yukoba.barometer.ui.features.thirdpartylicenses.types.ThirdPartyLibrary
 import io.github.yukoba.barometer.ui.types.NavigateDestination
 
 @Composable
@@ -65,9 +66,14 @@ fun App(
 
             composable(route = NavigateDestination.ThirdPartyLicenses.name) {
                 ThirdPartyLicensesScreen(
-                    onLicenseCardClick = {
-                        navController.navigate(NavigateDestination.ThirdPartyLicense.name)
-                    },
+                    libraries = listOf(
+                        ThirdPartyLibrary(
+                            name = "CreateTypographyFromFontName",
+                            website = "git://github.com/yu-ko-ba/CreateTypographyFromFontName.git",
+                            licenseName = "MIT",
+                            licenseUrl = "https://github.com/yu-ko-ba/CreateTypographyFromFontName/blob/main/LICENSE",
+                        )
+                    ),
                 )
             }
 
