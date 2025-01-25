@@ -2,8 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-
-    id("com.google.android.gms.oss-licenses-plugin")
+    alias(libs.plugins.licensee)
 }
 
 android {
@@ -46,7 +45,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.yukoba.create.typography)
-    implementation(libs.play.services.oss.licenses)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -63,4 +61,11 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+licensee {
+    allow("Apache-2.0")
+    allow("MIT")
+
+    allowUrl("https://github.com/yu-ko-ba/CreateTypographyFromFontName/blob/main/LICENSE")
 }
