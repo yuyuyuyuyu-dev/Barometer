@@ -18,15 +18,15 @@ import androidx.navigation.compose.rememberNavController
 import io.github.yukoba.barometer.ui.components.TopAppBar
 import io.github.yukoba.barometer.ui.features.barometer.BarometerViewModel
 import io.github.yukoba.barometer.ui.features.barometer.screens.BarometerScreen
-import io.github.yukoba.barometer.ui.features.thirdpartylicenses.screens.ThirdPartyLicenseScreen
+import io.github.yukoba.barometer.ui.features.thirdpartylicenses.ThirdPartyLicencesViewModel
 import io.github.yukoba.barometer.ui.features.thirdpartylicenses.screens.ThirdPartyLicensesScreen
-import io.github.yukoba.barometer.ui.features.thirdpartylicenses.types.ThirdPartyLibrary
 import io.github.yukoba.barometer.ui.types.NavigateDestination
 
 @Composable
 fun App(
     navController: NavHostController = rememberNavController(),
     barometerViewModel: BarometerViewModel = viewModel(),
+    thirdPartyLicencesViewModel: ThirdPartyLicencesViewModel = viewModel(),
 ) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = NavigateDestination.valueOf(
@@ -34,6 +34,7 @@ fun App(
     )
 
     val barometerUiState by barometerViewModel.uiState.collectAsState()
+    val thirdPartyLicensesUiState by thirdPartyLicencesViewModel.uiState.collectAsState()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -66,19 +67,8 @@ fun App(
 
             composable(route = NavigateDestination.ThirdPartyLicenses.name) {
                 ThirdPartyLicensesScreen(
-                    libraries = listOf(
-                        ThirdPartyLibrary(
-                            name = "CreateTypographyFromFontName",
-                            website = "git://github.com/yu-ko-ba/CreateTypographyFromFontName.git",
-                            licenseName = "MIT",
-                            licenseUrl = "https://github.com/yu-ko-ba/CreateTypographyFromFontName/blob/main/LICENSE",
-                        )
-                    ),
+                    thirdPartyLicenses = thirdPartyLicensesUiState.thirdPartyLicenses,
                 )
-            }
-
-            composable(route = NavigateDestination.ThirdPartyLicense.name) {
-                ThirdPartyLicenseScreen()
             }
         }
     }

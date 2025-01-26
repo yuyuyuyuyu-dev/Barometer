@@ -1,7 +1,7 @@
 package io.github.yukoba.barometer.ui.features.thirdpartylicenses.types
 
-data class ThirdPartyLibrary(
-    val name: String,
+data class ThirdPartyLicense(
+    val libraryName: String,
     val website: String?,
     val licenseName: String,
     val licenseUrl: String,

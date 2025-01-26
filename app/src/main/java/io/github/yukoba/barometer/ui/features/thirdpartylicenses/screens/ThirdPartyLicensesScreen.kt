@@ -15,11 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextDecoration
-import io.github.yukoba.barometer.ui.features.thirdpartylicenses.types.ThirdPartyLibrary
+import io.github.yukoba.barometer.ui.features.thirdpartylicenses.types.ThirdPartyLicense
 
 @Composable
 fun ThirdPartyLicensesScreen(
-    libraries: List<ThirdPartyLibrary>,
+    thirdPartyLicenses: List<ThirdPartyLicense>,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
@@ -27,15 +27,15 @@ fun ThirdPartyLicensesScreen(
     LazyColumn(
         modifier = modifier.fillMaxSize(),
     ) {
-        items(libraries) { library ->
+        items(thirdPartyLicenses) { thirdPartyLicense ->
             ListItem(
-                headlineContent = { Text(library.name) },
+                headlineContent = { Text(thirdPartyLicense.libraryName) },
                 supportingContent = {
                     Column {
                         Text("")
 
                         Text("Website")
-                        library.website?.let {
+                        thirdPartyLicense.website?.let {
                             Text(
                                 text = it,
                                 color = MaterialTheme.colorScheme.outline,
@@ -43,7 +43,7 @@ fun ThirdPartyLicensesScreen(
                                 modifier = Modifier.clickable {
                                     val intent = Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(library.website),
+                                        Uri.parse(it),
                                     )
                                     context.startActivity(intent)
                                 },
@@ -52,15 +52,15 @@ fun ThirdPartyLicensesScreen(
 
                         Text("")
 
-                        Text("License: ${library.licenseName}")
+                        Text("License: ${thirdPartyLicense.licenseName}")
                         Text(
-                            text = library.licenseUrl,
+                            text = thirdPartyLicense.licenseUrl,
                             color = MaterialTheme.colorScheme.outline,
                             textDecoration = TextDecoration.Underline,
                             modifier = Modifier.clickable {
                                 val intent = Intent(
                                     Intent.ACTION_VIEW,
-                                    Uri.parse(library.licenseUrl),
+                                    Uri.parse(thirdPartyLicense.licenseUrl),
                                 )
                                 context.startActivity(intent)
                             },
