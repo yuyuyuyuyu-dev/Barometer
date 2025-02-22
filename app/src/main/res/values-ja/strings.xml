@@ -2,6 +2,5 @@
 <resources>
     <string name="app_name">気圧計</string>
     <string name="could_not_get_barometric_sensor_value">気圧センサーの値を取得できませんでした。</string>
-    <string name="third_party_licenses">サードパーティーライセンス</string>
-    <string name="third_party_license">サードパーティーライセンス</string>
+    <string name="open_source_licenses">オープンソース ライセンス</string>
 </resources>

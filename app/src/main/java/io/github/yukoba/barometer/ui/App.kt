@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -16,9 +17,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dev.yuyuyuyuyu.simpletopappbar.SimpleTopAppBar
+import io.github.yukoba.barometer.R
 import io.github.yukoba.barometer.ui.barometer.BarometerViewModel
 import io.github.yukoba.barometer.ui.barometer.screens.BarometerScreen
-import io.github.yukoba.barometer.ui.opensourcelicenses.screens.ThirdPartyLicensesScreen
+import io.github.yukoba.barometer.ui.opensourcelicenses.screens.OpenSourceLicensesScreen
 
 @Composable
 fun App(
@@ -38,12 +40,13 @@ fun App(
             SimpleTopAppBar(
                 title = stringResource(currentScreen.title),
                 navigateBackIsPossible = navController.previousBackStackEntry != null,
+                openSourceLicensesButtonLabel = { Text(stringResource(R.string.open_source_licenses)) },
                 onNavigateBackButtonClick = {
                     navController.navigateUp()
                 },
                 onOpenSourceLicensesButtonClick = {
-                    if (currentScreen != NavigateDestination.ThirdPartyLicenses) {
-                        navController.navigate(NavigateDestination.ThirdPartyLicenses.name)
+                    if (currentScreen != NavigateDestination.OpenSourceLicenses) {
+                        navController.navigate(NavigateDestination.OpenSourceLicenses.name)
                     }
                 },
             )
@@ -61,8 +64,8 @@ fun App(
                 BarometerScreen(barometricPressure = barometerUiState.barometricPressure)
             }
 
-            composable(route = NavigateDestination.ThirdPartyLicenses.name) {
-                ThirdPartyLicensesScreen()
+            composable(route = NavigateDestination.OpenSourceLicenses.name) {
+                OpenSourceLicensesScreen()
             }
         }
     }
