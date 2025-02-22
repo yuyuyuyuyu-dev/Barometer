@@ -1,4 +1,4 @@
-package io.github.yukoba.barometer.ui.features.barometer.types
+package io.github.yukoba.barometer.ui.barometer.types
 
 data class BarometerUiState(
     val barometricPressure: Float? = null,

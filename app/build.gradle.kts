@@ -2,8 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.licensee)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.aboutlibraries)
 }
 
 android {
@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "io.github.yukoba.barometer"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "0.2.0"
@@ -47,6 +47,9 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.yukoba.create.typography)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.mikepenz.aboutlibraries.core)
+    implementation(libs.mikepenz.aboutlibraries.compose)
+    implementation(libs.yuyuyuyuyu.simpletopappbar)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -63,11 +66,4 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-}
-
-licensee {
-    allow("Apache-2.0")
-    allow("MIT")
-
-    allowUrl("https://github.com/yu-ko-ba/CreateTypographyFromFontName/blob/main/LICENSE")
 }

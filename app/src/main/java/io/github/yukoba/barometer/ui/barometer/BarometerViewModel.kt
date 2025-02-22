@@ -1,10 +1,10 @@
-package io.github.yukoba.barometer.ui.features.barometer
+package io.github.yukoba.barometer.ui.barometer
 
 import android.app.Application
 import android.content.Context
 import android.hardware.SensorManager
 import androidx.lifecycle.AndroidViewModel
-import io.github.yukoba.barometer.ui.features.barometer.types.BarometerUiState
+import io.github.yukoba.barometer.ui.barometer.types.BarometerUiState
 import io.github.yukoba.barometer.usecase.GetBarometricPressureUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

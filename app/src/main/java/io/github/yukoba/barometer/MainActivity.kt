@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import io.github.yukoba.barometer.ui.App
-import io.github.yukoba.barometer.ui.features.barometer.BarometerViewModel
+import io.github.yukoba.barometer.ui.barometer.BarometerViewModel
 import io.github.yukoba.barometer.ui.theme.BarometerTheme
 
 class MainActivity : ComponentActivity() {

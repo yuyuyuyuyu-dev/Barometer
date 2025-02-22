@@ -15,18 +15,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import io.github.yukoba.barometer.ui.components.TopAppBar
-import io.github.yukoba.barometer.ui.features.barometer.BarometerViewModel
-import io.github.yukoba.barometer.ui.features.barometer.screens.BarometerScreen
-import io.github.yukoba.barometer.ui.features.thirdpartylicenses.ThirdPartyLicencesViewModel
-import io.github.yukoba.barometer.ui.features.thirdpartylicenses.screens.ThirdPartyLicensesScreen
-import io.github.yukoba.barometer.ui.types.NavigateDestination
+import dev.yuyuyuyuyu.simpletopappbar.SimpleTopAppBar
+import io.github.yukoba.barometer.ui.barometer.BarometerViewModel
+import io.github.yukoba.barometer.ui.barometer.screens.BarometerScreen
+import io.github.yukoba.barometer.ui.opensourcelicenses.screens.ThirdPartyLicensesScreen
 
 @Composable
 fun App(
     navController: NavHostController = rememberNavController(),
     barometerViewModel: BarometerViewModel = viewModel(),
-    thirdPartyLicencesViewModel: ThirdPartyLicencesViewModel = viewModel(),
 ) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = NavigateDestination.valueOf(
@@ -34,18 +31,17 @@ fun App(
     )
 
     val barometerUiState by barometerViewModel.uiState.collectAsState()
-    val thirdPartyLicensesUiState by thirdPartyLicencesViewModel.uiState.collectAsState()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            TopAppBar(
+            SimpleTopAppBar(
                 title = stringResource(currentScreen.title),
                 navigateBackIsPossible = navController.previousBackStackEntry != null,
                 onNavigateBackButtonClick = {
                     navController.navigateUp()
                 },
-                onNavigateThirdPartyLicensesButtonClick = {
+                onOpenSourceLicensesButtonClick = {
                     if (currentScreen != NavigateDestination.ThirdPartyLicenses) {
                         navController.navigate(NavigateDestination.ThirdPartyLicenses.name)
                     }
@@ -66,9 +62,7 @@ fun App(
             }
 
             composable(route = NavigateDestination.ThirdPartyLicenses.name) {
-                ThirdPartyLicensesScreen(
-                    thirdPartyLicenses = thirdPartyLicensesUiState.thirdPartyLicenses,
-                )
+                ThirdPartyLicensesScreen()
             }
         }
     }
