@@ -20,7 +20,13 @@ fun BarometerScreen(
     ) {
         Text(
             text = if (barometricPressure != null) {
-                "${barometricPressure.toString().padEnd(10, '0')} hPa"
+                "${
+                    barometricPressure.toString()
+                        .padEnd(
+                            if (barometricPressure < 1000) 9 else 10,
+                            '0',
+                        )
+                } hPa"
             } else {
                 stringResource(R.string.could_not_get_barometric_sensor_value)
             },
