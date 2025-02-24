@@ -45,7 +45,7 @@ android {
 dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.yukoba.create.typography)
+    implementation(libs.yuyuyuyuyu.createtypography)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.mikepenz.aboutlibraries.core)
     implementation(libs.mikepenz.aboutlibraries.compose)

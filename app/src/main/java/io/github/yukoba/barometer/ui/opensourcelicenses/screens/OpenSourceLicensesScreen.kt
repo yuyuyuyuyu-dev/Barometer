@@ -7,4 +7,7 @@ import com.mikepenz.aboutlibraries.ui.compose.m3.LibrariesContainer
 @Composable
 fun OpenSourceLicensesScreen(
     modifier: Modifier = Modifier,
-) = LibrariesContainer(modifier = modifier)
+) = LibrariesContainer(
+    modifier = modifier,
+    showDescription = true,
+)
