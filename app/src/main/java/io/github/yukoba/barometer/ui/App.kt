@@ -61,7 +61,7 @@ fun App(
                 .padding(innerPadding)
         ) {
             composable(route = NavigateDestination.Main.name) {
-                BarometerScreen(barometricPressure = barometerUiState.barometricPressure)
+                BarometerScreen(barometerUiState)
             }
 
             composable(route = NavigateDestination.OpenSourceLicenses.name) {

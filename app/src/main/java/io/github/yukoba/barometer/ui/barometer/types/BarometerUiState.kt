@@ -1,5 +1,6 @@
 package io.github.yukoba.barometer.ui.barometer.types
 
-data class BarometerUiState(
-    val barometricPressure: Float? = null,
-)
+sealed interface BarometerUiState {
+    data class Success(val pressure: String) : BarometerUiState
+    data object Error : BarometerUiState
+}

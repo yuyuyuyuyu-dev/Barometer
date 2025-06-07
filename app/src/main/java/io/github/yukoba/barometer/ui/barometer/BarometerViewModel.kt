@@ -4,33 +4,38 @@ import android.app.Application
 import android.content.Context
 import android.hardware.SensorManager
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import io.github.yukoba.barometer.data.repositories.BarometricPressureRepositoryImpl
+import io.github.yukoba.barometer.domain.models.GetFormattedBarometricPressureFlowUseCase
+import io.github.yukoba.barometer.domain.useCases.GetFormattedBarometricPressureFlowUseCaseImpl
 import io.github.yukoba.barometer.ui.barometer.types.BarometerUiState
-import io.github.yukoba.barometer.usecase.GetBarometricPressureUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 
 class BarometerViewModel(application: Application) : AndroidViewModel(application) {
-    private val _uiState = MutableStateFlow(BarometerUiState())
-    val uiState: StateFlow<BarometerUiState> = _uiState.asStateFlow()
+    private val getFormattedBarometricPressureFlowUseCase: GetFormattedBarometricPressureFlowUseCase
 
-    private val getBarometricPressureUseCase = GetBarometricPressureUseCase(
-        sensorManager = getApplication<Application>().applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager,
-        onBarometricPressureChanged = ::onBarometricPressureChanged,
-    )
+    init {
+        val sensorManager = application.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-    fun onPaused() {
-        getBarometricPressureUseCase.disable()
+        val barometricPressureRepository = BarometricPressureRepositoryImpl(
+            sensorManager = sensorManager,
+        )
+
+        getFormattedBarometricPressureFlowUseCase = GetFormattedBarometricPressureFlowUseCaseImpl(
+            barometricPressureRepository = barometricPressureRepository,
+        )
     }
 
-    fun onResumed() {
-        getBarometricPressureUseCase.enable()
-    }
-
-    private fun onBarometricPressureChanged(pressure: Float) {
-        _uiState.update { currentState ->
-            currentState.copy(barometricPressure = pressure)
+    val uiState: StateFlow<BarometerUiState> = getFormattedBarometricPressureFlowUseCase()
+        .map { pressure ->
+            BarometerUiState.Success(pressure = pressure)
         }
-    }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000L),
+            initialValue = BarometerUiState.Error,
+        )
 }
