@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import io.github.yukoba.barometer.ui.App
-import io.github.yukoba.barometer.ui.theme.BarometerTheme
+import io.github.yukoba.barometer.ui.BarometerApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,10 +12,6 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
 
-        setContent {
-            BarometerTheme {
-                App()
-            }
-        }
+        setContent { BarometerApp() }
     }
 }

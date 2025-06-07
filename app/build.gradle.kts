@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.mikepenz.aboutlibraries.compose)
     implementation(libs.yuyuyuyuyu.simpletopappbar)
     implementation(libs.circuit)
+    implementation(libs.koin.android)
     implementation(libs.koin.compose)
     testImplementation(libs.kotlinx.coroutines.test)
 
