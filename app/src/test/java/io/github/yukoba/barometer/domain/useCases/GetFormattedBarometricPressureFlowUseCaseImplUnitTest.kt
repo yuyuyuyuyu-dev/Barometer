@@ -12,7 +12,9 @@ class GetFormattedBarometricPressureFlowUseCaseImplUnitTest {
 
     @Before
     fun setUp() {
-        val fakeBarometricPressureRepository = FakeBarometricPressureRepository()
+        val fakeBarometricPressureRepository = FakeBarometricPressureRepository(
+            firstPressure = 149.731f,
+        )
 
         useCase = GetFormattedBarometricPressureFlowUseCaseImpl(
             barometricPressureRepository = fakeBarometricPressureRepository,
