@@ -16,6 +16,8 @@ createTypography = "0.1.0"
 aboutLibraries = "12.1.2"
 simpleTopAppBar = "0.1.0"
 
+coroutineTest = "1.10.2"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -39,6 +41,8 @@ yuyuyuyuyu-createtypography = { group = "dev.yuyuyuyuyu", name = "createtypograp
 mikepenz-aboutlibraries-core = { group = "com.mikepenz", name = "aboutlibraries-core", version.ref = "aboutLibraries" }
 mikepenz-aboutlibraries-compose = { group = "com.mikepenz", name = "aboutlibraries-compose-m3", version.ref = "aboutLibraries" }
 yuyuyuyuyu-simpletopappbar = { group = "dev.yuyuyuyuyu", name = "simpletopappbar", version.ref = "simpleTopAppBar" }
+
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutineTest" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
