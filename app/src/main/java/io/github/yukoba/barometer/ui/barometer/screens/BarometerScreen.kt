@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import io.github.yukoba.barometer.R
 
@@ -33,4 +34,10 @@ fun BarometerScreen(
             fontSize = 34.sp,
         )
     }
+}
+
+@Preview
+@Composable
+private fun BarometerScreenPreview() {
+    BarometerScreen(barometricPressure = 149.731f)
 }
