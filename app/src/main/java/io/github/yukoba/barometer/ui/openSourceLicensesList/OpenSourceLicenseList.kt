@@ -1,13 +1,11 @@
-package io.github.yukoba.barometer.ui.opensourcelicenses.screens
+package io.github.yukoba.barometer.ui.openSourceLicensesList
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.mikepenz.aboutlibraries.ui.compose.m3.LibrariesContainer
 
 @Composable
-fun OpenSourceLicensesScreen(
-    modifier: Modifier = Modifier,
-) = LibrariesContainer(
+fun OpenSourceLicenseList(modifier: Modifier = Modifier) = LibrariesContainer(
     modifier = modifier,
     showDescription = true,
 )
