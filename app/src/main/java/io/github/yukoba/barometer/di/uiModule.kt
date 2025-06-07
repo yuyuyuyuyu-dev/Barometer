@@ -9,7 +9,9 @@ import org.koin.dsl.module
 val uiModule = module {
     single {
         Circuit.Builder()
-            .addUi<BarometerScreen, BarometerScreen.State> { _, modifier -> Barometer(modifier) }
+            .addUi<BarometerScreen, BarometerScreen.State> { state, modifier ->
+                Barometer(state, modifier)
+            }
             .addPresenter<BarometerScreen, BarometerScreen.State>(
                 BarometerPresenter(getFormattedBarometricPressureFlowUseCase = get()),
             )

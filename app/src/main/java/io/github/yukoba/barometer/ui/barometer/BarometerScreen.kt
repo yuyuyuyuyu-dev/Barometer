@@ -6,5 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data object BarometerScreen : Screen {
-    data object State : CircuitUiState
+    data class State(
+        val pressure: String?,
+    ) : CircuitUiState
 }
