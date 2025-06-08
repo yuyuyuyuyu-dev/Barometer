@@ -25,7 +25,7 @@ class GetFormattedBarometricPressureFlowUseCaseImplUnitTest {
     fun `invoke() should format pressure from repository to 5 decimal places with hPa`() = runTest {
         val expectedFormattedString = "149.73100 hPa"
 
-        val actualResult = useCase.invoke().first()
+        val actualResult = useCase.invoke().value.first()
 
         assertEquals(expectedFormattedString, actualResult)
     }
