@@ -8,6 +8,9 @@
       <SelectionState runConfigName="BarometricPressureRepositoryImplTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="BarometricPressureRepositoryImplTest (1)">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
