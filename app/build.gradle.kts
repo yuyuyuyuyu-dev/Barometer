@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "io.github.yukoba.barometer"
+    namespace = "dev.yuyuyuyuyu.barometer"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "io.github.yukoba.barometer"
+        applicationId = "dev.yuyuyuyuyu.barometer"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
