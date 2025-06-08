@@ -1,0 +1,26 @@
+package io.github.yukoba.barometer.domain.useCases
+
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
+import io.github.yukoba.barometer.data.models.BarometricPressureRepository
+import io.github.yukoba.barometer.domain.errors.DomainError
+import io.github.yukoba.barometer.domain.models.GetFormattedBarometricPressureFlowUseCase
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+
+class GetFormattedBarometricPressureFlowUseCaseImpl(
+    private val barometricPressureRepository: BarometricPressureRepository,
+) : GetFormattedBarometricPressureFlowUseCase {
+    // Round to 5 decimal places to match sensor precision.
+    override fun invoke(): Result<Flow<String>, DomainError> {
+        val result = barometricPressureRepository.getBarometricPressureFlow()
+        if (result.isErr) {
+            return Err(DomainError.FromDataLayer(result.error))
+        }
+
+        return Ok(result.value.map { pressure ->
+            "%.5f hPa".format(pressure)
+        })
+    }
+}

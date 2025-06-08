@@ -15,6 +15,11 @@ navigationCompose = "2.9.0"
 createTypography = "0.1.0"
 aboutLibraries = "12.1.2"
 simpleTopAppBar = "0.1.0"
+circuit = "0.28.0"
+koin = "4.0.4"
+result = "2.0.1"
+
+coroutineTest = "1.10.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -39,6 +44,12 @@ yuyuyuyuyu-createtypography = { group = "dev.yuyuyuyuyu", name = "createtypograp
 mikepenz-aboutlibraries-core = { group = "com.mikepenz", name = "aboutlibraries-core", version.ref = "aboutLibraries" }
 mikepenz-aboutlibraries-compose = { group = "com.mikepenz", name = "aboutlibraries-compose-m3", version.ref = "aboutLibraries" }
 yuyuyuyuyu-simpletopappbar = { group = "dev.yuyuyuyuyu", name = "simpletopappbar", version.ref = "simpleTopAppBar" }
+circuit = { group = "com.slack.circuit", name = "circuit-foundation", version.ref = "circuit" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin" }
+result = { group = "com.michael-bull.kotlin-result", name = "kotlin-result", version.ref = "result" }
+
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutineTest" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

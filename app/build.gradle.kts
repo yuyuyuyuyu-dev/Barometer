@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.aboutlibraries)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -50,6 +51,11 @@ dependencies {
     implementation(libs.mikepenz.aboutlibraries.core)
     implementation(libs.mikepenz.aboutlibraries.compose)
     implementation(libs.yuyuyuyuyu.simpletopappbar)
+    implementation(libs.circuit)
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
+    implementation(libs.result)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
