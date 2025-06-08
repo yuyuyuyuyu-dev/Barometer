@@ -29,7 +29,7 @@ fun Barometer(state: BarometerScreen.State, modifier: Modifier = Modifier) = Box
                 }
             }
         } else {
-            state.pressure.value ?: "Loading..."
+            state.pressure.value ?: stringResource(R.string.loading)
         },
         fontSize = 34.sp,
     )
