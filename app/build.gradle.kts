@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.circuit)
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
+    implementation(libs.result)
     testImplementation(libs.kotlinx.coroutines.test)
 
     implementation(libs.androidx.core.ktx)
