@@ -40,6 +40,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -55,6 +56,8 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
     implementation(libs.result)
+    implementation(libs.timber)
+
     testImplementation(libs.kotlinx.coroutines.test)
 
     implementation(libs.androidx.core.ktx)

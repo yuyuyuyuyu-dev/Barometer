@@ -18,6 +18,7 @@ simpleTopAppBar = "0.1.0"
 circuit = "0.28.0"
 koin = "4.0.4"
 result = "2.0.1"
+timber = "5.0.1"
 
 coroutineTest = "1.10.2"
 
@@ -48,6 +49,7 @@ circuit = { group = "com.slack.circuit", name = "circuit-foundation", version.re
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin" }
 result = { group = "com.michael-bull.kotlin-result", name = "kotlin-result", version.ref = "result" }
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutineTest" }
 

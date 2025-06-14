@@ -6,12 +6,7 @@ interface BaseError {
     val message: String
 
     val messageWithTrace: String
-        get() = "$message " + errorTrace.joinToString(" ") { "($it)" }
+        get() = "$message " + errorTrace.joinToString(" ") { "(${it.fileName}:${it.lineNumber})" }
 
-    fun appendTrace(): BaseError
-
-    data class TraceInfo(
-        val fileName: String,
-        val lineNumber: Int,
-    )
+    fun appendTrace(traceInfo: TraceInfo): BaseError
 }

@@ -11,11 +11,13 @@ import com.slack.circuit.runtime.presenter.Presenter
 import dev.yuyuyuyuyu.barometer.data.errors.BarometricPressureRepositoryError
 import dev.yuyuyuyuyu.barometer.domain.errors.DomainError
 import dev.yuyuyuyuyu.barometer.domain.models.GetFormattedBarometricPressureFlowUseCase
+import dev.yuyuyuyuyu.barometer.error.TraceInfo
 import dev.yuyuyuyuyu.barometer.ui.barometer.models.PressureState
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import timber.log.Timber
 
 class BarometerPresenter(
     private val getFormattedBarometricPressureFlowUseCase: GetFormattedBarometricPressureFlowUseCase,
@@ -30,6 +32,8 @@ class BarometerPresenter(
                     }
                 },
                 failure = { error ->
+                    Timber.e(error.appendTrace(TraceInfo.getCurrent()).messageWithTrace)
+
                     when (error) {
                         is DomainError.FromDataLayer -> when (error.error) {
                             is BarometricPressureRepositoryError.DeviceDoesNotHaveBarometricSensor -> {

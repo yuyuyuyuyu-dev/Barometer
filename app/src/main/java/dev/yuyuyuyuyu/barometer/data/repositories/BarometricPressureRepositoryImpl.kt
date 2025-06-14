@@ -9,6 +9,7 @@ import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import dev.yuyuyuyuyu.barometer.data.errors.BarometricPressureRepositoryError
 import dev.yuyuyuyuyu.barometer.data.models.BarometricPressureRepository
+import dev.yuyuyuyuyu.barometer.error.TraceInfo
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -23,7 +24,8 @@ class BarometricPressureRepositoryImpl(
     override fun getBarometricPressureFlow(): Result<Flow<Float>, BarometricPressureRepositoryError> {
         if (barometricPressureSensor == null) {
             return Err(
-                BarometricPressureRepositoryError.DeviceDoesNotHaveBarometricSensor().appendTrace()
+                BarometricPressureRepositoryError.DeviceDoesNotHaveBarometricSensor()
+                    .appendTrace(TraceInfo.getCurrent())
             )
         }
 
