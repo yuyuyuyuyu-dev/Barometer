@@ -4,6 +4,8 @@ import dev.yuyuyuyuyu.barometer.error.BaseError
 import dev.yuyuyuyuyu.barometer.error.TraceAppenderDelegate
 
 sealed interface BarometricPressureRepositoryError : DataError {
+    override fun appendTrace(): BarometricPressureRepositoryError
+
     data class DeviceDoesNotHaveBarometricSensor(
         override val errorTrace: List<BaseError.TraceInfo> = emptyList(),
     ) : BarometricPressureRepositoryError {
