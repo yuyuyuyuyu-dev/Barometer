@@ -9,8 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import dev.yuyuyuyuyu.barometer.R
-import dev.yuyuyuyuyu.barometer.data.errors.BarometricPressureRepositoryError
-import dev.yuyuyuyuyu.barometer.domain.errors.DomainError
+import dev.yuyuyuyuyu.barometer.ui.barometer.models.PressureState
 
 @Composable
 fun Barometer(state: BarometerScreen.State, modifier: Modifier = Modifier) = Box(
@@ -18,18 +17,10 @@ fun Barometer(state: BarometerScreen.State, modifier: Modifier = Modifier) = Box
     contentAlignment = Alignment.Center,
 ) {
     Text(
-        text = if (state.pressure.isErr) {
-            when (val error = state.pressure.error) {
-                is DomainError.FromDataLayer -> {
-                    when (error.error) {
-                        is BarometricPressureRepositoryError.DeviceDoesNotHaveBarometricSensor -> {
-                            stringResource(R.string.could_not_get_barometric_sensor_value)
-                        }
-                    }
-                }
-            }
-        } else {
-            state.pressure.value ?: stringResource(R.string.loading)
+        text = when (state.pressure) {
+            is PressureState.Success -> state.pressure.pressure
+            is PressureState.Failure -> stringResource(R.string.could_not_get_barometric_sensor_value)
+            is PressureState.Loading -> stringResource(R.string.loading)
         },
         fontSize = 34.sp,
     )
