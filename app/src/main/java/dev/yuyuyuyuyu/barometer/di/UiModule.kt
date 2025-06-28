@@ -4,9 +4,9 @@ import com.slack.circuit.foundation.Circuit
 import dev.yuyuyuyuyu.barometer.ui.barometer.Barometer
 import dev.yuyuyuyuyu.barometer.ui.barometer.BarometerPresenter
 import dev.yuyuyuyuyu.barometer.ui.barometer.BarometerScreen
-import dev.yuyuyuyuyu.barometer.ui.openSourceLicensesList.OpenSourceLicenseList
-import dev.yuyuyuyuyu.barometer.ui.openSourceLicensesList.OpenSourceLicenseListPresenter
-import dev.yuyuyuyuyu.barometer.ui.openSourceLicensesList.OpenSourceLicenseListScreen
+import dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList.OpenSourceLicenseList
+import dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList.OpenSourceLicenseListPresenter
+import dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList.OpenSourceLicenseListScreen
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 

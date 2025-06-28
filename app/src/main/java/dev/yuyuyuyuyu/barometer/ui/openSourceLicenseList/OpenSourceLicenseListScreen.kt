@@ -1,4 +1,4 @@
-package dev.yuyuyuyuyu.barometer.ui.openSourceLicensesList
+package dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList
 
 import com.slack.circuit.runtime.CircuitUiState
 import com.slack.circuit.runtime.screen.Screen

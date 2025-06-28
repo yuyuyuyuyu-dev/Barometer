@@ -11,7 +11,7 @@ import com.slack.circuit.foundation.NavigableCircuitContent
 import com.slack.circuit.foundation.rememberCircuitNavigator
 import dev.yuyuyuyuyu.barometer.R
 import dev.yuyuyuyuyu.barometer.ui.barometer.BarometerScreen
-import dev.yuyuyuyuyu.barometer.ui.openSourceLicensesList.OpenSourceLicenseListScreen
+import dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList.OpenSourceLicenseListScreen
 import dev.yuyuyuyuyu.barometer.ui.theme.BarometerTheme
 import dev.yuyuyuyuyu.simpletopappbar.SimpleTopAppBar
 import org.koin.compose.KoinContext
