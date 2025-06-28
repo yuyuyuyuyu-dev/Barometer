@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import com.slack.circuit.backstack.rememberSaveableBackStack
 import com.slack.circuit.foundation.CircuitCompositionLocals
@@ -13,13 +14,15 @@ import dev.yuyuyuyuyu.barometer.R
 import dev.yuyuyuyuyu.barometer.ui.barometer.BarometerScreen
 import dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList.OpenSourceLicenseListScreen
 import dev.yuyuyuyuyu.barometer.ui.theme.BarometerTheme
-import dev.yuyuyuyuyu.simpletopappbar.SimpleTopAppBar
+import dev.yuyuyuyuyu.simpleTopAppBar.SimpleTopAppBar
 import org.koin.compose.koinInject
 
 @Composable
 fun BarometerApp() {
     val backStack = rememberSaveableBackStack(root = BarometerScreen)
     val navigator = rememberCircuitNavigator(backStack)
+
+    val uriHandler = LocalUriHandler.current
 
     BarometerTheme {
         Scaffold(
@@ -37,6 +40,9 @@ fun BarometerApp() {
                     onNavigateBackButtonClick = { navigator.pop() },
                     onOpenSourceLicensesButtonClick = {
                         navigator.goTo(OpenSourceLicenseListScreen)
+                    },
+                    onSourceCodeButtonClick = {
+                        uriHandler.openUri("https://github.com/yuyuyuyuyu-dev/Barometer")
                     },
                 )
             }
