@@ -10,7 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import dev.yuyuyuyuyu.barometer.R
-import dev.yuyuyuyuyu.barometer.ui.barometer.models.PressureState
+import dev.yuyuyuyuyu.barometer.ui.barometer.models.BarometerState
 
 @Composable
 fun Barometer(state: BarometerScreen.State, modifier: Modifier = Modifier) = Box(
@@ -18,10 +18,10 @@ fun Barometer(state: BarometerScreen.State, modifier: Modifier = Modifier) = Box
     contentAlignment = Alignment.Center,
 ) {
     Text(
-        text = when (state.pressure) {
-            is PressureState.Success -> state.pressure.pressure
-            is PressureState.Failure -> stringResource(R.string.could_not_get_barometric_sensor_value)
-            is PressureState.Loading -> stringResource(R.string.loading)
+        text = when (state.barometerState) {
+            is BarometerState.SuccessToGetPressure -> state.barometerState.pressure
+            is BarometerState.DeviceDoesNotHaveBarometricSensor -> stringResource(R.string.device_does_not_have_barometric_sensor_error)
+            is BarometerState.Loading -> stringResource(R.string.loading)
         },
         fontSize = 34.sp,
         lineHeight = 51.sp,
@@ -33,7 +33,7 @@ fun Barometer(state: BarometerScreen.State, modifier: Modifier = Modifier) = Box
 fun SuccessBarometerPreview() {
     Barometer(
         state = BarometerScreen.State(
-            pressure = PressureState.Success("731.149 hPa"),
+            barometerState = BarometerState.SuccessToGetPressure("731.149 hPa"),
         ),
     )
 }
@@ -43,7 +43,7 @@ fun SuccessBarometerPreview() {
 fun FailureBarometerPreview() {
     Barometer(
         state = BarometerScreen.State(
-            pressure = PressureState.Failure,
+            barometerState = BarometerState.DeviceDoesNotHaveBarometricSensor,
         ),
     )
 }
@@ -53,7 +53,7 @@ fun FailureBarometerPreview() {
 fun LoadingBarometerPreview() {
     Barometer(
         state = BarometerScreen.State(
-            pressure = PressureState.Loading,
+            barometerState = BarometerState.Loading,
         ),
     )
 }

@@ -12,7 +12,7 @@ import dev.yuyuyuyuyu.barometer.data.errors.BarometricPressureRepositoryError
 import dev.yuyuyuyuyu.barometer.domain.errors.DomainError
 import dev.yuyuyuyuyu.barometer.domain.models.GetFormattedBarometricPressureFlowUseCase
 import dev.yuyuyuyuyu.barometer.error.TraceInfo
-import dev.yuyuyuyuyu.barometer.ui.barometer.models.PressureState
+import dev.yuyuyuyuyu.barometer.ui.barometer.models.BarometerState
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
@@ -24,11 +24,11 @@ class BarometerPresenter(
 ) : Presenter<BarometerScreen.State>, ViewModel() {
     @Composable
     override fun present(): BarometerScreen.State {
-        val pressureStateFlow = rememberRetained {
+        val barometerStateFlow = rememberRetained {
             getFormattedBarometricPressureFlowUseCase().fold(
                 success = { pressureFlow ->
                     pressureFlow.map {
-                        PressureState.Success(it)
+                        BarometerState.SuccessToGetPressure(it)
                     }
                 },
                 failure = { error ->
@@ -37,7 +37,7 @@ class BarometerPresenter(
                     when (error) {
                         is DomainError.FromDataLayer -> when (error.error) {
                             is BarometricPressureRepositoryError.DeviceDoesNotHaveBarometricSensor -> {
-                                flowOf(PressureState.Failure)
+                                flowOf(BarometerState.DeviceDoesNotHaveBarometricSensor)
                             }
                         }
                     }
@@ -46,11 +46,11 @@ class BarometerPresenter(
                 .stateIn(
                     scope = viewModelScope,
                     started = SharingStarted.WhileSubscribed(5000L),
-                    initialValue = PressureState.Loading,
+                    initialValue = BarometerState.Loading,
                 )
         }
 
-        val pressureState by pressureStateFlow.collectAsStateWithLifecycle()
-        return BarometerScreen.State(pressure = pressureState)
+        val pressureState by barometerStateFlow.collectAsStateWithLifecycle()
+        return BarometerScreen.State(barometerState = pressureState)
     }
 }
