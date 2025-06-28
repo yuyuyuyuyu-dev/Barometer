@@ -14,7 +14,6 @@ import dev.yuyuyuyuyu.barometer.ui.barometer.BarometerScreen
 import dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList.OpenSourceLicenseListScreen
 import dev.yuyuyuyuyu.barometer.ui.theme.BarometerTheme
 import dev.yuyuyuyuyu.simpletopappbar.SimpleTopAppBar
-import org.koin.compose.KoinContext
 import org.koin.compose.koinInject
 
 @Composable
@@ -22,34 +21,32 @@ fun BarometerApp() {
     val backStack = rememberSaveableBackStack(root = BarometerScreen)
     val navigator = rememberCircuitNavigator(backStack)
 
-    KoinContext {
-        BarometerTheme {
-            Scaffold(
-                topBar = {
-                    val currentScreen = backStack.topRecord?.screen
+    BarometerTheme {
+        Scaffold(
+            topBar = {
+                val currentScreen = backStack.topRecord?.screen
 
-                    SimpleTopAppBar(
-                        title = stringResource(
-                            when (currentScreen) {
-                                is OpenSourceLicenseListScreen -> R.string.open_source_licenses
-                                else -> R.string.app_name
-                            }
-                        ),
-                        navigateBackIsPossible = backStack.size > 1,
-                        onNavigateBackButtonClick = { navigator.pop() },
-                        onOpenSourceLicensesButtonClick = {
-                            navigator.goTo(OpenSourceLicenseListScreen)
-                        },
-                    )
-                }
-            ) { innerPadding ->
-                CircuitCompositionLocals(koinInject()) {
-                    NavigableCircuitContent(
-                        navigator = navigator,
-                        backStack = backStack,
-                        modifier = Modifier.padding(innerPadding),
-                    )
-                }
+                SimpleTopAppBar(
+                    title = stringResource(
+                        when (currentScreen) {
+                            is OpenSourceLicenseListScreen -> R.string.open_source_licenses
+                            else -> R.string.app_name
+                        }
+                    ),
+                    navigateBackIsPossible = backStack.size > 1,
+                    onNavigateBackButtonClick = { navigator.pop() },
+                    onOpenSourceLicensesButtonClick = {
+                        navigator.goTo(OpenSourceLicenseListScreen)
+                    },
+                )
+            }
+        ) { innerPadding ->
+            CircuitCompositionLocals(koinInject()) {
+                NavigableCircuitContent(
+                    navigator = navigator,
+                    backStack = backStack,
+                    modifier = Modifier.padding(innerPadding),
+                )
             }
         }
     }
