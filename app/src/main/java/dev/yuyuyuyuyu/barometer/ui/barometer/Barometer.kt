@@ -2,6 +2,7 @@ package dev.yuyuyuyuyu.barometer.ui.barometer
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,8 +24,7 @@ fun Barometer(state: BarometerScreen.State, modifier: Modifier = Modifier) = Box
             is BarometerState.DeviceDoesNotHaveBarometricSensor -> stringResource(R.string.device_does_not_have_barometric_sensor_error)
             is BarometerState.Loading -> stringResource(R.string.loading)
         },
-        fontSize = 34.sp,
-        lineHeight = 51.sp,
+        style = MaterialTheme.typography.displaySmall,
     )
 }
 
