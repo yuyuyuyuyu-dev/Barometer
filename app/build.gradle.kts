@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.timber)
 
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
