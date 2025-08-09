@@ -1,5 +1,6 @@
 package dev.yuyuyuyuyu.barometer.domain.useCases
 
+import com.github.michaelbull.result.unwrap
 import dev.yuyuyuyuyu.barometer.data.repositories.FakeBarometricPressureRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -25,7 +26,7 @@ class GetFormattedBarometricPressureFlowUseCaseImplUnitTest {
     fun `invoke() should format pressure from repository to 5 decimal places with hPa`() = runTest {
         val expectedFormattedString = "149.73100 hPa"
 
-        val actualResult = useCase.invoke().value.first()
+        val actualResult = useCase.invoke().unwrap().first()
 
         assertEquals(expectedFormattedString, actualResult)
     }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.hardware.SensorManager
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.github.michaelbull.result.unwrap
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -28,7 +29,7 @@ class BarometricPressureRepositoryImplTest {
     @Test
     // this test success if device has barometric sensor
     fun barometricPressure_emits_at_least_one_value() = runTest {
-        val firstValue = repository.getBarometricPressureFlow().value.first()
+        val firstValue = repository.getBarometricPressureFlow().unwrap().first()
 
         // The value range is derived from the local atmospheric pressure at the highest and lowest elevations on Earth,
         // factoring in fluctuations from weather phenomena.
