@@ -1,4 +1,7 @@
 # Barometer
+
+[![Tests](https://github.com/yuyuyuyuyu-dev/Barometer/actions/workflows/tests.yml/badge.svg)](https://github.com/yuyuyuyuyu-dev/Barometer/actions/workflows/tests.yml)
+
 A simple Android app that captures and displays real-time barometric pressure readings from the device's sensor.
 
 
