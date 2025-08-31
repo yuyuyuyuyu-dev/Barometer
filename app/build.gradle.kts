@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "dev.yuyuyuyuyu.barometer"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "dev.yuyuyuyuyu.barometer"
