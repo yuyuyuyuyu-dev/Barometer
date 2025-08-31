@@ -10,7 +10,7 @@ import com.slack.circuit.retained.rememberRetained
 import com.slack.circuit.runtime.presenter.Presenter
 import dev.yuyuyuyuyu.barometer.data.errors.BarometricPressureRepositoryError
 import dev.yuyuyuyuyu.barometer.domain.errors.DomainError
-import dev.yuyuyuyuyu.barometer.domain.models.GetFormattedBarometricPressureFlowUseCase
+import dev.yuyuyuyuyu.barometer.domain.useCase.GetFormattedBarometricPressureFlowUseCase
 import dev.yuyuyuyuyu.barometer.error.TraceInfo
 import dev.yuyuyuyuyu.barometer.ui.barometer.models.BarometerState
 import kotlinx.coroutines.flow.SharingStarted

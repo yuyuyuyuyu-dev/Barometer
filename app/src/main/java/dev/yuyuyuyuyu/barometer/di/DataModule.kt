@@ -2,8 +2,8 @@ package dev.yuyuyuyuyu.barometer.di
 
 import android.content.Context
 import android.hardware.SensorManager
-import dev.yuyuyuyuyu.barometer.data.models.BarometricPressureRepository
-import dev.yuyuyuyuyu.barometer.data.repositories.BarometricPressureRepositoryImpl
+import dev.yuyuyuyuyu.barometer.data.repository.BarometricPressureRepository
+import dev.yuyuyuyuyu.barometer.data.repository.impl.BarometricPressureRepositoryImpl
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf

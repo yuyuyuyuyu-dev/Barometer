@@ -1,4 +1,4 @@
-package dev.yuyuyuyuyu.barometer.domain.models
+package dev.yuyuyuyuyu.barometer.domain.useCase
 
 import com.github.michaelbull.result.Result
 import dev.yuyuyuyuyu.barometer.domain.errors.DomainError

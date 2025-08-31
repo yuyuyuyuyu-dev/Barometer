@@ -1,10 +1,11 @@
-package dev.yuyuyuyuyu.barometer.data.repositories
+package dev.yuyuyuyuyu.barometer.data.repository
 
 import android.content.Context
 import android.hardware.SensorManager
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.github.michaelbull.result.unwrap
+import dev.yuyuyuyuyu.barometer.data.repository.impl.BarometricPressureRepositoryImpl
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Before

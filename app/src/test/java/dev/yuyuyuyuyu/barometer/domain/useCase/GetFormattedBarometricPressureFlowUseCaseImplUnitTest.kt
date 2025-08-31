@@ -1,8 +1,9 @@
-package dev.yuyuyuyuyu.barometer.domain.useCases
+package dev.yuyuyuyuyu.barometer.domain.useCase
 
 import app.cash.turbine.test
 import com.github.michaelbull.result.unwrap
-import dev.yuyuyuyuyu.barometer.data.repositories.FakeBarometricPressureRepository
+import dev.yuyuyuyuyu.barometer.data.repository.fake.FakeBarometricPressureRepository
+import dev.yuyuyuyuyu.barometer.domain.useCase.impl.GetFormattedBarometricPressureFlowUseCaseImpl
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals

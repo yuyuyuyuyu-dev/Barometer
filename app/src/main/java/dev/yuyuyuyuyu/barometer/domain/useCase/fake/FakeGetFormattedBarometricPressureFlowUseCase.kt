@@ -1,9 +1,9 @@
-package dev.yuyuyuyuyu.barometer.domain.useCases
+package dev.yuyuyuyuyu.barometer.domain.useCase.fake
 
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import dev.yuyuyuyuyu.barometer.domain.errors.DomainError
-import dev.yuyuyuyuyu.barometer.domain.models.GetFormattedBarometricPressureFlowUseCase
+import dev.yuyuyuyuyu.barometer.domain.useCase.GetFormattedBarometricPressureFlowUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

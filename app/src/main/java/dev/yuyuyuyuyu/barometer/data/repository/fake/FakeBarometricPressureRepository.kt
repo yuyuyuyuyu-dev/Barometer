@@ -1,9 +1,9 @@
-package dev.yuyuyuyuyu.barometer.data.repositories
+package dev.yuyuyuyuyu.barometer.data.repository.fake
 
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import dev.yuyuyuyuyu.barometer.data.errors.BarometricPressureRepositoryError
-import dev.yuyuyuyuyu.barometer.data.models.BarometricPressureRepository
+import dev.yuyuyuyuyu.barometer.data.repository.BarometricPressureRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 

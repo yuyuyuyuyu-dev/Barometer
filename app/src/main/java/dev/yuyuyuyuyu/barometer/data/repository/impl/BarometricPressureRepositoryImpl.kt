@@ -1,4 +1,4 @@
-package dev.yuyuyuyuyu.barometer.data.repositories
+package dev.yuyuyuyuyu.barometer.data.repository.impl
 
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -8,7 +8,7 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import dev.yuyuyuyuyu.barometer.data.errors.BarometricPressureRepositoryError
-import dev.yuyuyuyuyu.barometer.data.models.BarometricPressureRepository
+import dev.yuyuyuyuyu.barometer.data.repository.BarometricPressureRepository
 import dev.yuyuyuyuyu.barometer.error.TraceInfo
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -25,7 +25,7 @@ class BarometricPressureRepositoryImpl(
         if (barometricPressureSensor == null) {
             return Err(
                 BarometricPressureRepositoryError.DeviceDoesNotHaveBarometricSensor()
-                    .appendTrace(TraceInfo.getCurrent())
+                    .appendTrace(TraceInfo.Companion.getCurrent())
             )
         }
 

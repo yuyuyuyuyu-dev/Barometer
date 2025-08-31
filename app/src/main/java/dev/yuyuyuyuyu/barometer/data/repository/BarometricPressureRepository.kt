@@ -1,4 +1,4 @@
-package dev.yuyuyuyuyu.barometer.data.models
+package dev.yuyuyuyuyu.barometer.data.repository
 
 import com.github.michaelbull.result.Result
 import dev.yuyuyuyuyu.barometer.data.errors.BarometricPressureRepositoryError

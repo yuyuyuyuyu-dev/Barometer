@@ -1,12 +1,12 @@
-package dev.yuyuyuyuyu.barometer.domain.useCases
+package dev.yuyuyuyuyu.barometer.domain.useCase.impl
 
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.fold
-import dev.yuyuyuyuyu.barometer.data.models.BarometricPressureRepository
+import dev.yuyuyuyuyu.barometer.data.repository.BarometricPressureRepository
 import dev.yuyuyuyuyu.barometer.domain.errors.DomainError
-import dev.yuyuyuyuyu.barometer.domain.models.GetFormattedBarometricPressureFlowUseCase
+import dev.yuyuyuyuyu.barometer.domain.useCase.GetFormattedBarometricPressureFlowUseCase
 import dev.yuyuyuyuyu.barometer.error.TraceInfo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -22,7 +22,7 @@ class GetFormattedBarometricPressureFlowUseCaseImpl(
                 Ok(pressure.map { "%.5f hPa".format(it) })
             },
             failure = { error ->
-                Err(DomainError.FromDataLayer(error).appendTrace(TraceInfo.getCurrent()))
+                Err(DomainError.FromDataLayer(error).appendTrace(TraceInfo.Companion.getCurrent()))
             },
         )
     }
