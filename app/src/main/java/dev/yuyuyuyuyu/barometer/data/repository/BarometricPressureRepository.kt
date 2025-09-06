@@ -5,5 +5,5 @@ import dev.yuyuyuyuyu.barometer.data.errors.BarometricPressureRepositoryError
 import kotlinx.coroutines.flow.Flow
 
 interface BarometricPressureRepository {
-    fun getBarometricPressureFlow(): Result<Flow<Float>, BarometricPressureRepositoryError>
+    val pressure: Result<Flow<Float>, BarometricPressureRepositoryError>
 }

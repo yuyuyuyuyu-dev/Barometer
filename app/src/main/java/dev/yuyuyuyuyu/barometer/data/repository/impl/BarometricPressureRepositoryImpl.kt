@@ -21,38 +21,37 @@ class BarometricPressureRepositoryImpl(
         sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE)
     }
 
-    override fun getBarometricPressureFlow(): Result<Flow<Float>, BarometricPressureRepositoryError> {
+    override val pressure: Result<Flow<Float>, BarometricPressureRepositoryError> =
         if (barometricPressureSensor == null) {
-            return Err(
+            Err(
                 BarometricPressureRepositoryError.DeviceDoesNotHaveBarometricSensor()
                     .appendTrace(TraceInfo.Companion.getCurrent())
             )
-        }
+        } else {
+            Ok(
+                callbackFlow {
+                    val listener = object : SensorEventListener {
+                        override fun onSensorChanged(event: SensorEvent?) {
+                            if (event?.sensor?.type == Sensor.TYPE_PRESSURE) {
+                                trySend(event.values.first())
+                            }
+                        }
 
-        return Ok(
-            callbackFlow {
-                val listener = object : SensorEventListener {
-                    override fun onSensorChanged(event: SensorEvent?) {
-                        if (event?.sensor?.type == Sensor.TYPE_PRESSURE) {
-                            trySend(event.values.first())
+                        override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+                            // NOOP
                         }
                     }
 
-                    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-                        // NOOP
+                    sensorManager.registerListener(
+                        listener,                          // listener: android.hardware.SensorEventListener
+                        barometricPressureSensor,          // sensor: android.hardware.Sensor
+                        SensorManager.SENSOR_DELAY_NORMAL, // samplingPeriodUs: int
+                    )
+
+                    awaitClose {
+                        sensorManager.unregisterListener(listener)
                     }
                 }
-
-                sensorManager.registerListener(
-                    listener,                          // listener: android.hardware.SensorEventListener
-                    barometricPressureSensor,          // sensor: android.hardware.Sensor
-                    SensorManager.SENSOR_DELAY_NORMAL, // samplingPeriodUs: int
-                )
-
-                awaitClose {
-                    sensorManager.unregisterListener(listener)
-                }
-            }
-        )
-    }
+            )
+        }
 }

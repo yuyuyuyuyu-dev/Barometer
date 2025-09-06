@@ -30,7 +30,7 @@ class BarometricPressureRepositoryImplTest {
     @Test
     // this test success if device has barometric sensor
     fun barometricPressure_emits_at_least_one_value() = runTest {
-        val firstValue = repository.getBarometricPressureFlow().unwrap().first()
+        val firstValue = repository.pressure.unwrap().first()
 
         // The value range is derived from the local atmospheric pressure at the highest and lowest elevations on Earth,
         // factoring in fluctuations from weather phenomena.
