@@ -7,7 +7,6 @@ import dev.yuyuyuyuyu.barometer.ui.barometer.BarometerScreen
 import dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList.OpenSourceLicenseList
 import dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList.OpenSourceLicenseListPresenter
 import dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList.OpenSourceLicenseListScreen
-import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val uiModule = module {
@@ -16,7 +15,11 @@ val uiModule = module {
             .addUi<BarometerScreen, BarometerScreen.State> { state, modifier ->
                 Barometer(state, modifier)
             }
-            .addPresenter<BarometerScreen, BarometerScreen.State>(get<BarometerPresenter>())
+            .addPresenter<BarometerScreen, BarometerScreen.State>(
+                BarometerPresenter(
+                    getFormattedBarometricPressureFlowUseCase = get(),
+                )
+            )
 
             .addUi<OpenSourceLicenseListScreen, OpenSourceLicenseListScreen.State> { _, modifier ->
                 OpenSourceLicenseList(modifier)
@@ -27,6 +30,4 @@ val uiModule = module {
 
             .build()
     }
-
-    viewModelOf(::BarometerPresenter)
 }
