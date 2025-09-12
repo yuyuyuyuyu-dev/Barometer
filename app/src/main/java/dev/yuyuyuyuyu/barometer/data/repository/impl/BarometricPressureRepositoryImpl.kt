@@ -11,15 +11,17 @@ import dev.yuyuyuyuyu.barometer.data.errors.BarometricPressureRepositoryError
 import dev.yuyuyuyuyu.barometer.data.repository.BarometricPressureRepository
 import dev.yuyuyuyuyu.barometer.error.TraceInfo
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.shareIn
 
 class BarometricPressureRepositoryImpl(
     private val sensorManager: SensorManager,
-    coroutineScope: CoroutineScope,
+    ioScope: CoroutineScope,
 ) : BarometricPressureRepository {
     private val barometricPressureSensor: Sensor? by lazy {
         sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE)
@@ -56,8 +58,9 @@ class BarometricPressureRepositoryImpl(
                         sensorManager.unregisterListener(listener)
                     }
                 }
+                    .flowOn(Dispatchers.IO)
                     .shareIn(
-                        scope = coroutineScope,
+                        scope = ioScope,
                         started = SharingStarted.WhileSubscribed(5000),
                     )
             )
