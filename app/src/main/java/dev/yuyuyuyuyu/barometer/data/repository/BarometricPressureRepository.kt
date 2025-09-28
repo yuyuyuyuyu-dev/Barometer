@@ -1,9 +1,8 @@
 package dev.yuyuyuyuyu.barometer.data.repository
 
-import com.github.michaelbull.result.Result
-import dev.yuyuyuyuyu.barometer.data.errors.BarometricPressureRepositoryError
-import kotlinx.coroutines.flow.Flow
+import dev.yuyuyuyuyu.barometer.data.model.BarometricPressureState
+import kotlinx.coroutines.flow.StateFlow
 
 interface BarometricPressureRepository {
-    val pressure: Result<Flow<Float>, BarometricPressureRepositoryError>
+    val pressure: StateFlow<BarometricPressureState>
 }

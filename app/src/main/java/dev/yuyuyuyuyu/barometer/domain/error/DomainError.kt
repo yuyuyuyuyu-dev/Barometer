@@ -1,6 +1,6 @@
-package dev.yuyuyuyuyu.barometer.domain.errors
+package dev.yuyuyuyuyu.barometer.domain.error
 
-import dev.yuyuyuyuyu.barometer.data.errors.DataError
+import dev.yuyuyuyuyu.barometer.data.error.DataError
 import dev.yuyuyuyuyu.barometer.error.BaseError
 import dev.yuyuyuyuyu.barometer.error.TraceInfo
 

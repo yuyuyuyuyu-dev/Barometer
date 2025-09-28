@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import dev.yuyuyuyuyu.barometer.R
-import dev.yuyuyuyuyu.barometer.ui.barometer.models.BarometerState
+import dev.yuyuyuyuyu.barometer.ui.barometer.model.BarometerState
 
 @Composable
 fun Barometer(state: BarometerScreen.State, modifier: Modifier = Modifier) = Box(

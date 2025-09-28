@@ -1,14 +1,14 @@
-package dev.yuyuyuyuyu.barometer.data.errors
+package dev.yuyuyuyuyu.barometer.data.error
 
 import dev.yuyuyuyuyu.barometer.error.TraceAppenderDelegate
 import dev.yuyuyuyuyu.barometer.error.TraceInfo
 
-sealed interface BarometricPressureRepositoryError : DataError {
-    override fun appendTrace(traceInfo: TraceInfo): BarometricPressureRepositoryError
+sealed interface BarometricPressureError : DataError {
+    override fun appendTrace(traceInfo: TraceInfo): BarometricPressureError
 
     data class DeviceDoesNotHaveBarometricSensor(
         override val errorTrace: List<TraceInfo> = emptyList(),
-    ) : BarometricPressureRepositoryError {
+    ) : BarometricPressureError {
         override val message: String = "device does not have barometric sensor"
 
         override fun appendTrace(traceInfo: TraceInfo): DeviceDoesNotHaveBarometricSensor {

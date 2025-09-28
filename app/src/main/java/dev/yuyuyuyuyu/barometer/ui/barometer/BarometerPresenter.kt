@@ -2,56 +2,31 @@ package dev.yuyuyuyuyu.barometer.ui.barometer
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.github.michaelbull.result.fold
-import com.slack.circuit.retained.rememberRetained
 import com.slack.circuit.runtime.presenter.Presenter
-import dev.yuyuyuyuyu.barometer.data.errors.BarometricPressureRepositoryError
-import dev.yuyuyuyuyu.barometer.domain.errors.DomainError
-import dev.yuyuyuyuyu.barometer.domain.useCase.GetFormattedBarometricPressureFlowUseCase
-import dev.yuyuyuyuyu.barometer.error.TraceInfo
-import dev.yuyuyuyuyu.barometer.ui.barometer.models.BarometerState
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
-import timber.log.Timber
+import dev.yuyuyuyuyu.barometer.data.model.BarometricPressureState
+import dev.yuyuyuyuyu.barometer.data.repository.BarometricPressureRepository
+import dev.yuyuyuyuyu.barometer.domain.useCase.FormatPressureUseCase
+import dev.yuyuyuyuyu.barometer.ui.barometer.model.BarometerState
 
 class BarometerPresenter(
-    private val getFormattedBarometricPressureFlowUseCase: GetFormattedBarometricPressureFlowUseCase,
+    private val formatPressureUseCase: FormatPressureUseCase,
+    private val barometricPressureRepository: BarometricPressureRepository,
 ) : Presenter<BarometerScreen.State> {
     @Composable
     override fun present(): BarometerScreen.State {
-        var barometerState: BarometerState by rememberRetained {
-            mutableStateOf(BarometerState.Loading)
-        }
+        val barometricPressureState by barometricPressureRepository.pressure.collectAsStateWithLifecycle()
 
-        getFormattedBarometricPressureFlowUseCase().fold(
-            success = { pressureFlow ->
-                pressureFlow.map {
-                    BarometerState.SuccessToGetPressure(it)
-                }
-            },
-            failure = { error ->
-                Timber.e(error.appendTrace(TraceInfo.getCurrent()).messageWithTrace)
+        return BarometerScreen.State(
+            barometerState = when (val pressureState = barometricPressureState) {
+                BarometricPressureState.Loading -> BarometerState.Loading
 
-                when (error) {
-                    is DomainError.FromDataLayer -> when (error.error) {
-                        is BarometricPressureRepositoryError.DeviceDoesNotHaveBarometricSensor -> {
-                            flowOf(BarometerState.DeviceDoesNotHaveBarometricSensor)
-                        }
-                    }
-                }
-            },
-        )
-            .onEach { state ->
-                barometerState = state
+                is BarometricPressureState.Success -> BarometerState.SuccessToGetPressure(
+                    pressure = formatPressureUseCase(pressure = pressureState.pressure),
+                )
+
+                is BarometricPressureState.Failure -> BarometerState.DeviceDoesNotHaveBarometricSensor
             }
-            .collectAsStateWithLifecycle(
-                initialValue = barometerState,
-            )
-
-        return BarometerScreen.State(barometerState)
+        )
     }
 }

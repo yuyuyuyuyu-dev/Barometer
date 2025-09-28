@@ -16,8 +16,9 @@ val uiModule = module {
                 Barometer(state, modifier)
             }
             .addPresenter<BarometerScreen, BarometerScreen.State>(
-                BarometerPresenter(
-                    getFormattedBarometricPressureFlowUseCase = get(),
+                presenter = BarometerPresenter(
+                    formatPressureUseCase = get(),
+                    barometricPressureRepository = get(),
                 )
             )
 

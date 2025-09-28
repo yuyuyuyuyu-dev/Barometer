@@ -1,4 +1,4 @@
-package dev.yuyuyuyuyu.barometer.ui.barometer.models
+package dev.yuyuyuyuyu.barometer.ui.barometer.model
 
 sealed interface BarometerState {
     data class SuccessToGetPressure(val pressure: String) : BarometerState

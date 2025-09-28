@@ -1,4 +1,4 @@
-package dev.yuyuyuyuyu.barometer.data.errors
+package dev.yuyuyuyuyu.barometer.data.error
 
 import dev.yuyuyuyuyu.barometer.error.BaseError
 import dev.yuyuyuyuyu.barometer.error.TraceInfo

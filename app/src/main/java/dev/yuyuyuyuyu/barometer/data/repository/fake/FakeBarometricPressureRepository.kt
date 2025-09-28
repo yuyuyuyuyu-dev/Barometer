@@ -1,15 +1,18 @@
 package dev.yuyuyuyuyu.barometer.data.repository.fake
 
-import com.github.michaelbull.result.Ok
+import dev.yuyuyuyuyu.barometer.data.model.BarometricPressureState
 import dev.yuyuyuyuyu.barometer.data.repository.BarometricPressureRepository
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
-class FakeBarometricPressureRepository(firstPressure: Float) : BarometricPressureRepository {
+class FakeBarometricPressureRepository(
+    firstPressure: BarometricPressureState,
+) : BarometricPressureRepository {
     private val flow = MutableStateFlow(firstPressure)
 
-    override val pressure = Ok(flow)
+    override val pressure = flow.asStateFlow()
 
-    fun updatePressure(newValue: Float) {
+    fun updatePressure(newValue: BarometricPressureState) {
         flow.value = newValue
     }
 }
