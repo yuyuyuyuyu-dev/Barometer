@@ -34,8 +34,8 @@ android {
         applicationId = "dev.yuyuyuyuyu.barometer"
         minSdk = 24
         targetSdk = 35
-        versionCode = releaseVersionName?.let(::versionNameToCode) ?: 3
-        versionName = releaseVersionName ?: "0.5.0"
+        versionCode = releaseVersionName?.let(::versionNameToCode) ?: 1
+        versionName = releaseVersionName ?: "0.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
