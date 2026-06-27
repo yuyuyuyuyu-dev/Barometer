@@ -9,6 +9,23 @@ plugins {
     id("kotlin-parcelize")
 }
 
+// Release metadata injected by CI (see .github/workflows/release.yml).
+// All are null for local builds, which then fall back to debug signing and the
+// hardcoded version below.
+val releaseVersionName: String? = System.getenv("VERSION_NAME")
+val releaseKeystoreFile: String? = System.getenv("KEYSTORE_FILE")
+
+// Maps a semantic version name to a strictly increasing Int versionCode.
+// minor and patch each occupy 3 digits (0..999); major can go up to 2099
+// before exceeding Google Play's 2,100,000,000 limit.
+fun versionNameToCode(name: String): Int {
+    val parts = name.split(".")
+    require(parts.size == 3) { "VERSION_NAME must be MAJOR.MINOR.PATCH, but was: $name" }
+    val (major, minor, patch) = parts.map(String::toInt)
+    require(minor in 0..999 && patch in 0..999) { "minor/patch must be 0..999, but was: $name" }
+    return major * 1_000_000 + minor * 1_000 + patch
+}
+
 android {
     namespace = "dev.yuyuyuyuyu.barometer"
     compileSdk = 36
@@ -17,10 +34,21 @@ android {
         applicationId = "dev.yuyuyuyuyu.barometer"
         minSdk = 24
         targetSdk = 35
-        versionCode = 3
-        versionName = "0.5.0"
+        versionCode = releaseVersionName?.let(::versionNameToCode) ?: 1
+        versionName = releaseVersionName ?: "0.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        if (releaseKeystoreFile != null) {
+            create("release") {
+                storeFile = file(releaseKeystoreFile)
+                storePassword = System.getenv("KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("KEY_ALIAS")
+                keyPassword = System.getenv("KEY_PASSWORD")
+            }
+        }
     }
 
     buildTypes {
@@ -30,7 +58,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName(
+                if (releaseKeystoreFile != null) "release" else "debug"
+            )
         }
     }
     compileOptions {
