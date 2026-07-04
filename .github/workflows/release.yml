@@ -49,5 +49,5 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           packageName: dev.yuyuyuyuyu.barometer
           releaseFiles: app/build/outputs/bundle/release/app-release.aab
-          track: internal
+          tracks: internal
           status: completed
