@@ -9,14 +9,15 @@ class FormatPressureUseCaseImplTest {
     private val useCase = FormatPressureUseCaseImpl()
 
     @Test
-    fun `invoke() should format pressure to 5 decimal places with hPa`() = runTest {
-        // Arrange
-        val expected = "149.73100 hPa"
+    fun `should format pressure to 5 decimal places with hPa`() =
+        runTest {
+            // Arrange
+            val expected = "149.73100 hPa"
 
-        // Act
-        val actual = useCase(pressure = 149.731f)
+            // Act
+            val actual = useCase(pressure = 149.731f)
 
-        // Assert
-        assertEquals(expected, actual)
-    }
+            // Assert
+            assertEquals(expected, actual)
+        }
 }
