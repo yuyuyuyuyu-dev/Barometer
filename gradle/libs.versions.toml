@@ -1,66 +1,65 @@
 [versions]
-# Core
+aboutLibraries = "13.1.0"
+activityCompose = "1.11.0"
 agp = "8.13.1"
-kotlin = "2.2.21"
+circuit = "0.31.0"
+composeBom = "2025.11.00"
 coreKtx = "1.17.0"
+coroutineTest = "1.10.2"
+createTypography = "0.1.3"
+detekt = "1.23.8"
+espressoCore = "3.7.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
-espressoCore = "3.7.0"
-kotlinxSerializationJson = "1.9.0"
-lifecycleRuntimeKtx = "2.9.4"
-activityCompose = "1.11.0"
-composeBom = "2025.11.00"
-
-# App dependencies
-lifeCycleViewmodelCompose = "2.9.4"
-navigationCompose = "2.9.6"
-createTypography = "0.1.3"
-aboutLibraries = "13.1.0"
-simpleTopAppBar = "0.3.1"
-circuit = "0.31.0"
 koin = "4.1.1"
+kotlin = "2.2.21"
+kotlinxSerializationJson = "1.9.0"
+ktlint = "14.2.0"
+lifeCycleViewmodelCompose = "2.9.4"
+lifecycleRuntimeKtx = "2.9.4"
 result = "2.1.0"
+simpleTopAppBar = "0.3.1"
 timber = "5.0.1"
-
-# Test dependencies
-coroutineTest = "1.10.2"
 turbine = "1.2.1"
+versionCatalogUpdate = "1.1.0"
 
 [libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-ui = { group = "androidx.compose.ui", name = "ui" }
-androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
-androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-
-androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifeCycleViewmodelCompose" }
-androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
+androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-lifecycle-runtime-testing = { module = "androidx.lifecycle:lifecycle-runtime-testing", version.ref = "lifecycleRuntimeKtx" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifeCycleViewmodelCompose" }
+androidx-material3 = { module = "androidx.compose.material3:material3" }
+androidx-ui = { module = "androidx.compose.ui:ui" }
+androidx-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
+androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+circuit = { module = "com.slack.circuit:circuit-foundation", version.ref = "circuit" }
+circuit-test = { module = "com.slack.circuit:circuit-test", version.ref = "circuit" }
+junit = { module = "junit:junit", version.ref = "junit" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutineTest" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
-yuyuyuyuyu-createtypography = { group = "dev.yuyuyuyuyu", name = "createtypography", version.ref = "createTypography" }
-mikepenz-aboutlibraries-core = { group = "com.mikepenz", name = "aboutlibraries-core", version.ref = "aboutLibraries" }
-mikepenz-aboutlibraries-compose = { group = "com.mikepenz", name = "aboutlibraries-compose-m3", version.ref = "aboutLibraries" }
-yuyuyuyuyu-simpletopappbar = { group = "dev.yuyuyuyuyu", name = "simpletopappbar", version.ref = "simpleTopAppBar" }
-circuit = { group = "com.slack.circuit", name = "circuit-foundation", version.ref = "circuit" }
-koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
-koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin" }
-result = { group = "com.michael-bull.kotlin-result", name = "kotlin-result", version.ref = "result" }
-timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
-
-kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutineTest" }
-turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+mikepenz-aboutlibraries-compose = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "aboutLibraries" }
+mikepenz-aboutlibraries-core = { module = "com.mikepenz:aboutlibraries-core", version.ref = "aboutLibraries" }
+result = { module = "com.michael-bull.kotlin-result:kotlin-result", version.ref = "result" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+yuyuyuyuyu-createtypography = { module = "dev.yuyuyuyuyu:createtypography", version.ref = "createTypography" }
+yuyuyuyuyu-simpletopappbar = { module = "dev.yuyuyuyuyu:simpletopappbar", version.ref = "simpleTopAppBar" }
 
 [plugins]
+aboutlibraries = { id = "com.mikepenz.aboutlibraries.plugin.android", version.ref = "aboutLibraries" }
 android-application = { id = "com.android.application", version.ref = "agp" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-aboutlibraries = { id = "com.mikepenz.aboutlibraries.plugin.android", version.ref = "aboutLibraries" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+versionCatalogUpdate = { id = "nl.littlerobots.version-catalog-update", version.ref = "versionCatalogUpdate" }

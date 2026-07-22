@@ -18,15 +18,17 @@ class BarometerPresenter(
         val barometricPressureState by barometricPressureRepository.pressure.collectAsStateWithLifecycle()
 
         return BarometerScreen.State(
-            barometerState = when (val pressureState = barometricPressureState) {
-                BarometricPressureState.Loading -> BarometerState.Loading
+            barometerState =
+                when (val pressureState = barometricPressureState) {
+                    BarometricPressureState.Loading -> BarometerState.Loading
 
-                is BarometricPressureState.Success -> BarometerState.SuccessToGetPressure(
-                    pressure = formatPressureUseCase(pressure = pressureState.pressure),
-                )
+                    is BarometricPressureState.Success ->
+                        BarometerState.SuccessToGetPressure(
+                            pressure = formatPressureUseCase(pressure = pressureState.pressure),
+                        )
 
-                is BarometricPressureState.Failure -> BarometerState.DeviceDoesNotHaveBarometricSensor
-            }
+                    is BarometricPressureState.Failure -> BarometerState.DeviceDoesNotHaveBarometricSensor
+                },
         )
     }
 }

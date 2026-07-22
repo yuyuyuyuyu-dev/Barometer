@@ -6,6 +6,8 @@ data class TraceInfo(
 ) {
     companion object {
         fun getCurrent(): TraceInfo {
+            // This Throwable is never thrown; it only exists to capture the current stack trace.
+            @Suppress("ThrowingExceptionsWithoutMessageOrCause")
             val stackTrace = Throwable().stackTrace
             val element = stackTrace.getOrNull(1)!!
 

@@ -1,0 +1,15 @@
+# Detekt configuration.
+#
+# Only the deltas from Detekt's bundled default config are listed here;
+# `buildUponDefaultConfig = true` merges them onto the default ruleset.
+naming:
+  FunctionNaming:
+    # Compose @Composable functions conventionally use PascalCase.
+    ignoreAnnotated:
+      - "Composable"
+
+style:
+  UnusedPrivateMember:
+    # @Preview functions are invoked by the IDE and the Compose tooling, never from code.
+    ignoreAnnotated:
+      - "Preview"

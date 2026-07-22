@@ -13,9 +13,10 @@ fun OpenSourceLicenseList(modifier: Modifier = Modifier) {
     val libraries by rememberLibraries(R.raw.aboutlibraries)
 
     LibrariesContainer(
-        libraries = libraries?.libraries?.distinctBy { it.name }?.let {
-            libraries?.copy(libraries = it.toImmutableList())
-        },
+        libraries =
+            libraries?.libraries?.distinctBy { it.name }?.let {
+                libraries?.copy(libraries = it.toImmutableList())
+            },
         modifier = modifier,
         showDescription = true,
     )

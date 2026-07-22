@@ -17,18 +17,24 @@ import dev.yuyuyuyuyu.barometer.R
 import dev.yuyuyuyuyu.barometer.ui.barometer.model.BarometerState
 
 @Composable
-fun Barometer(state: BarometerScreen.State, modifier: Modifier = Modifier) = Box(
-    modifier = modifier
-        .fillMaxSize()
-        .padding(dimensionResource(R.dimen.screen_padding)),
+fun Barometer(
+    state: BarometerScreen.State,
+    modifier: Modifier = Modifier,
+) = Box(
+    modifier =
+        modifier
+            .fillMaxSize()
+            .padding(dimensionResource(R.dimen.screen_padding)),
     contentAlignment = Alignment.Center,
 ) {
     Text(
-        text = when (state.barometerState) {
-            is BarometerState.SuccessToGetPressure -> state.barometerState.pressure
-            is BarometerState.DeviceDoesNotHaveBarometricSensor -> stringResource(R.string.device_does_not_have_barometric_sensor_error)
-            is BarometerState.Loading -> stringResource(R.string.loading)
-        },
+        text =
+            when (state.barometerState) {
+                is BarometerState.SuccessToGetPressure -> state.barometerState.pressure
+                is BarometerState.DeviceDoesNotHaveBarometricSensor ->
+                    stringResource(R.string.device_does_not_have_barometric_sensor_error)
+                is BarometerState.Loading -> stringResource(R.string.loading)
+            },
         style = MaterialTheme.typography.displaySmall,
     )
 }
@@ -42,11 +48,12 @@ private fun BarometerPreview(
 }
 
 private class BarometerPreviewParameterProvider : PreviewParameterProvider<BarometerScreen.State> {
-    override val values: Sequence<BarometerScreen.State> = sequenceOf(
-        BarometerScreen.State(
-            BarometerState.SuccessToGetPressure(pressure = "731.149 hPa"),
-        ),
-        BarometerScreen.State(BarometerState.DeviceDoesNotHaveBarometricSensor),
-        BarometerScreen.State(BarometerState.Loading),
-    )
+    override val values: Sequence<BarometerScreen.State> =
+        sequenceOf(
+            BarometerScreen.State(
+                BarometerState.SuccessToGetPressure(pressure = "731.149 hPa"),
+            ),
+            BarometerScreen.State(BarometerState.DeviceDoesNotHaveBarometricSensor),
+            BarometerScreen.State(BarometerState.Loading),
+        )
 }

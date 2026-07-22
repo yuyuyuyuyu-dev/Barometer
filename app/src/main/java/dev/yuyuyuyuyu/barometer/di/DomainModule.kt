@@ -6,6 +6,7 @@ import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-val domainModule = module {
-    singleOf(::FormatPressureUseCaseImpl) { bind<FormatPressureUseCase>() }
-}
+val domainModule =
+    module {
+        singleOf(::FormatPressureUseCaseImpl) { bind<FormatPressureUseCase>() }
+    }

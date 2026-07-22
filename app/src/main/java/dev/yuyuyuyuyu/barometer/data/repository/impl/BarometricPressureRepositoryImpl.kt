@@ -9,20 +9,24 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
+// Keeps the sensor subscription alive across short-lived unsubscriptions such as a
+// configuration change, so the sensor is not torn down and re-registered needlessly.
+private const val STOP_TIMEOUT_MILLIS = 5_000L
+
 class BarometricPressureRepositoryImpl(
     barometricPressureDataSource: BarometricPressureDataSource,
     ioScope: CoroutineScope,
 ) : BarometricPressureRepository {
-    override val pressure = barometricPressureDataSource.pressure
-        .map { result ->
-            result.fold(
-                success = { BarometricPressureState.Success(pressure = it) },
-                failure = { BarometricPressureState.Failure(error = it) },
+    override val pressure =
+        barometricPressureDataSource.pressure
+            .map { result ->
+                result.fold(
+                    success = { BarometricPressureState.Success(pressure = it) },
+                    failure = { BarometricPressureState.Failure(error = it) },
+                )
+            }.stateIn(
+                scope = ioScope,
+                started = SharingStarted.WhileSubscribed(stopTimeoutMillis = STOP_TIMEOUT_MILLIS),
+                initialValue = BarometricPressureState.Loading,
             )
-        }
-        .stateIn(
-            scope = ioScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = BarometricPressureState.Loading,
-        )
 }
