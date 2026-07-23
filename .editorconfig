@@ -1,25 +1,12 @@
 root = true
 
-[*]
-charset = utf-8
-end_of_line = lf
-insert_final_newline = true
-trim_trailing_whitespace = true
-indent_style = space
-indent_size = 4
-
+# Both settings below exist only to stop ktlint and Detekt from contradicting each
+# other. Everything else is deliberately left at each tool's own default.
 [*.{kt,kts}]
-# Compose @Composable functions conventionally use PascalCase.
+# ktlint's standard wants camelCase, but @Composable functions conventionally use
+# PascalCase, and the violation cannot be auto-corrected.
 ktlint_function_naming_ignore_when_annotated_with = Composable
-# Matches Detekt's MaxLineLength default, so both tools agree on where a line is too long.
+# ktlint allows 140 columns and Detekt 120, which deadlocks: ktlintFormat joins a
+# wrapped signature into a 123-column line that Detekt then rejects, and re-joins it
+# on every run. 120 is the stricter of the two defaults.
 max_line_length = 120
-
-[*.{yml,yaml,json,toml,md}]
-indent_size = 2
-
-# Markdown allows trailing spaces for hard line breaks.
-[*.md]
-trim_trailing_whitespace = false
-
-[*.{bat,cmd}]
-end_of_line = crlf
