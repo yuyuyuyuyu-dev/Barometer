@@ -1,0 +1,162 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+# Every job below is independent, so a superseded push would otherwise leave up to
+# eight stale jobs occupying the concurrency limit. Pushes to main are left alone so
+# that every commit there stays verified.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  ktlint:
+    name: ktlint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v7
+
+      - name: Setup build
+        uses: ./.github/actions/setup-build
+
+      - name: Check formatting
+        run: ./gradlew ktlintCheck
+
+  detekt:
+    name: Detekt
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v7
+
+      - name: Setup build
+        uses: ./.github/actions/setup-build
+
+      - name: Check for code smells
+        run: ./gradlew detekt
+
+  android-lint:
+    name: Android Lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v7
+
+      - name: Setup build
+        uses: ./.github/actions/setup-build
+
+      - name: Check for Android issues
+        run: ./gradlew lintDebug
+
+      - name: Upload lint report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: lint-report
+          path: app/build/reports/lint-results-debug.html
+          if-no-files-found: ignore
+
+  version-catalog:
+    name: Version catalog
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v7
+
+      - name: Setup build
+        uses: ./.github/actions/setup-build
+
+      # versionCatalogFormat rewrites the file in place, so a non-empty diff means
+      # the committed catalog was not formatted.
+      - name: Check the version catalog is formatted
+        run: |
+          ./gradlew versionCatalogFormat
+          git diff --exit-code gradle/libs.versions.toml
+
+  actionlint:
+    name: actionlint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v7
+
+      # actionlint ships no action of its own, and Dependabot cannot see through the
+      # `docker://` form its docs suggest, so that version would have gone stale
+      # unnoticed. This wrapper is a plain action reference Dependabot can bump, and
+      # it resolves the actionlint release itself at run time.
+      - name: Check workflow files
+        uses: raven-actions/actionlint@v2
+
+  unit-tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v7
+
+      - name: Setup build
+        uses: ./.github/actions/setup-build
+
+      - name: Run unit tests
+        run: ./gradlew testDebugUnitTest
+
+      - name: Upload test report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: unit-test-report
+          path: app/build/reports/tests/testDebugUnitTest
+          if-no-files-found: ignore
+
+  build-android-test:
+    name: Build (androidTest)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v7
+
+      - name: Setup build
+        uses: ./.github/actions/setup-build
+
+      # The instrumentation tests need a real barometer, so CI cannot run them.
+      # Assembling them at least keeps them compiling against the current dependencies.
+      - name: Build the instrumentation test APK
+        run: ./gradlew assembleDebugAndroidTest
+
+  build-release:
+    name: Build (release)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v7
+
+      - name: Setup build
+        uses: ./.github/actions/setup-build
+
+      # The same task release.yml publishes with. Without the signing environment
+      # variables it falls back to the debug key, so the R8 pipeline that a release
+      # depends on is exercised here without any secrets.
+      - name: Build the release bundle
+        run: ./gradlew bundleRelease

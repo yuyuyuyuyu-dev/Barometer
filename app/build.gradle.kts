@@ -6,7 +6,14 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.aboutlibraries)
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.detekt)
     id("kotlin-parcelize")
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    config.setFrom(rootProject.file("detekt.yml"))
 }
 
 // Release metadata injected by CI (see .github/workflows/release.yml).
@@ -56,11 +63,12 @@ android {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
-            signingConfig = signingConfigs.getByName(
-                if (releaseKeystoreFile != null) "release" else "debug"
-            )
+            signingConfig =
+                signingConfigs.getByName(
+                    if (releaseKeystoreFile != null) "release" else "debug",
+                )
         }
     }
     compileOptions {
@@ -70,6 +78,11 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+    }
+    testOptions {
+        // Presenter tests drive the Compose runtime through Molecule, which calls into
+        // android.os.Trace. Returning defaults keeps those stubs from throwing.
+        unitTests.isReturnDefaultValues = true
     }
 }
 
@@ -81,7 +94,6 @@ kotlin {
 
 dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.navigation.compose)
     implementation(libs.yuyuyuyuyu.createtypography)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.mikepenz.aboutlibraries.core)
@@ -93,6 +105,8 @@ dependencies {
     implementation(libs.result)
     implementation(libs.timber)
 
+    testImplementation(libs.androidx.lifecycle.runtime.testing)
+    testImplementation(libs.circuit.test)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
 

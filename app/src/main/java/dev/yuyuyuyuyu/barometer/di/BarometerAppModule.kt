@@ -7,10 +7,11 @@ import kotlinx.coroutines.SupervisorJob
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-val barometerAppModule = module {
-    single(named(ScopeQualifier.IO)) {
-        CoroutineScope(SupervisorJob() + Dispatchers.IO)
-    }
+val barometerAppModule =
+    module {
+        single(named(ScopeQualifier.IO)) {
+            CoroutineScope(SupervisorJob() + Dispatchers.IO)
+        }
 
-    includes(uiModule, domainModule, dataModule)
-}
+        includes(uiModule, domainModule, dataModule)
+    }

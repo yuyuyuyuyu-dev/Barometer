@@ -13,15 +13,16 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-val dataModule = module {
-    single<BarometricPressureRepository> {
-        BarometricPressureRepositoryImpl(
-            barometricPressureDataSource = get(),
-            ioScope = get(named(ScopeQualifier.IO)),
-        )
+val dataModule =
+    module {
+        single<BarometricPressureRepository> {
+            BarometricPressureRepositoryImpl(
+                barometricPressureDataSource = get(),
+                ioScope = get(named(ScopeQualifier.IO)),
+            )
+        }
+
+        singleOf(::BarometricPressureDataSourceImpl) { bind<BarometricPressureDataSource>() }
+
+        single { androidContext().getSystemService(Context.SENSOR_SERVICE) as SensorManager }
     }
-
-    singleOf(::BarometricPressureDataSourceImpl) { bind<BarometricPressureDataSource>() }
-
-    single { androidContext().getSystemService(Context.SENSOR_SERVICE) as SensorManager }
-}

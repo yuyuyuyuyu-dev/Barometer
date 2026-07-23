@@ -1,0 +1,12 @@
+root = true
+
+# Both settings below exist only to stop ktlint and Detekt from contradicting each
+# other. Everything else is deliberately left at each tool's own default.
+[*.{kt,kts}]
+# ktlint's standard wants camelCase, but @Composable functions conventionally use
+# PascalCase, and the violation cannot be auto-corrected.
+ktlint_function_naming_ignore_when_annotated_with = Composable
+# ktlint allows 140 columns and Detekt 120, which deadlocks: ktlintFormat joins a
+# wrapped signature into a 123-column line that Detekt then rejects, and re-joins it
+# on every run. 120 is the stricter of the two defaults.
+max_line_length = 120

@@ -22,40 +22,47 @@ class BarometricPressureDataSourceImpl(
         sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE)
     }
 
-    override val pressure = callbackFlow {
-        if (barometricPressureSensor == null) {
-            trySend(
-                element = Err(
-                    error = BarometricPressureError.DeviceDoesNotHaveBarometricSensor()
-                        .appendTrace(TraceInfo.getCurrent()),
-                ),
+    override val pressure =
+        callbackFlow {
+            if (barometricPressureSensor == null) {
+                trySend(
+                    element =
+                        Err(
+                            error =
+                                BarometricPressureError
+                                    .DeviceDoesNotHaveBarometricSensor()
+                                    .appendTrace(TraceInfo.getCurrent()),
+                        ),
+                )
+
+                return@callbackFlow
+            }
+
+            val listener =
+                object : SensorEventListener {
+                    override fun onSensorChanged(event: SensorEvent?) {
+                        if (event?.sensor?.type == Sensor.TYPE_PRESSURE) {
+                            trySend(Ok(event.values.first()))
+                        }
+                    }
+
+                    override fun onAccuracyChanged(
+                        sensor: Sensor?,
+                        accuracy: Int,
+                    ) {
+                        // NOOP
+                    }
+                }
+
+            sensorManager.registerListener(
+                listener, // listener: android.hardware.SensorEventListener
+                barometricPressureSensor, // sensor: android.hardware.Sensor
+                SensorManager.SENSOR_DELAY_NORMAL, // samplingPeriodUs: int
             )
 
-            return@callbackFlow
-        }
-
-        val listener = object : SensorEventListener {
-            override fun onSensorChanged(event: SensorEvent?) {
-                if (event?.sensor?.type == Sensor.TYPE_PRESSURE) {
-                    trySend(Ok(event.values.first()))
-                }
+            awaitClose {
+                Timber.d("awaitClose")
+                sensorManager.unregisterListener(listener)
             }
-
-            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-                // NOOP
-            }
-        }
-
-        sensorManager.registerListener(
-            listener,                          // listener: android.hardware.SensorEventListener
-            barometricPressureSensor,          // sensor: android.hardware.Sensor
-            SensorManager.SENSOR_DELAY_NORMAL, // samplingPeriodUs: int
-        )
-
-        awaitClose {
-            Timber.d("awaitClose")
-            sensorManager.unregisterListener(listener)
-        }
-    }
-        .flowOn(Dispatchers.IO)
+        }.flowOn(Dispatchers.IO)
 }

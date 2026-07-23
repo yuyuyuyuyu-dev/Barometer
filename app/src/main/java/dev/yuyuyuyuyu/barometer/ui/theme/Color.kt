@@ -1,3 +1,6 @@
+// An ARGB literal is the definition of a colour, so there is no clearer name to extract it to.
+@file:Suppress("MagicNumber")
+
 package dev.yuyuyuyuyu.barometer.ui.theme
 
 import androidx.compose.ui.graphics.Color

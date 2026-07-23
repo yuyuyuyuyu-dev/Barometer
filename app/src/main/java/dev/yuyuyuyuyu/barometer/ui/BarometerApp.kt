@@ -30,12 +30,13 @@ fun BarometerApp() {
                 val currentScreen = backStack.topRecord?.screen
 
                 SimpleTopAppBar(
-                    title = stringResource(
-                        when (currentScreen) {
-                            is OpenSourceLicenseListScreen -> R.string.open_source_licenses
-                            else -> R.string.app_name
-                        }
-                    ),
+                    title =
+                        stringResource(
+                            when (currentScreen) {
+                                is OpenSourceLicenseListScreen -> R.string.open_source_licenses
+                                else -> R.string.app_name
+                            },
+                        ),
                     navigateBackIsPossible = backStack.size > 1,
                     onNavigateBackButtonClick = { navigator.pop() },
                     onOpenSourceLicensesButtonClick = {
@@ -45,7 +46,7 @@ fun BarometerApp() {
                         uriHandler.openUri("https://github.com/yuyuyuyuyu-dev/Barometer")
                     },
                 )
-            }
+            },
         ) { innerPadding ->
             CircuitCompositionLocals(koinInject()) {
                 NavigableCircuitContent(
