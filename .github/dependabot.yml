@@ -1,0 +1,17 @@
+# Dependabot configuration for automated dependency updates.
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+version: 2
+updates:
+  # Gradle dependencies (version catalog + module build scripts).
+  - package-ecosystem: gradle
+    directory: "/"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 1
+
+  # GitHub Actions used by the CI/release workflows and the composite action.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 1
