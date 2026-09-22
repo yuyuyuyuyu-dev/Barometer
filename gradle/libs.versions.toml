@@ -1,8 +1,8 @@
 [versions]
 aboutLibraries = "15.2.0"
 activityCompose = "1.13.0"
-agp = "9.4.0"
-circuit = "0.38.0"
+agp = "9.4.1"
+circuit = "0.39.0"
 composeBom = "2026.09.00"
 coreKtx = "1.19.0"
 coroutineTest = "1.11.0"
