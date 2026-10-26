@@ -10,9 +10,9 @@ We want to be crystal clear: **Our App does not collect, store, or transmit any 
 
 We do not collect any of the following:
 
-* **Personal Information:** Your name, email address, phone number, address, photos, contacts, or any other personally identifiable information.
-* **Sensitive Information:** Your location data, financial and payment information, etc.
-* **Non-Personal Information:** Device information, usage statistics, crash reports, or any other data related to your interaction with the App.
+- **Personal Information:** Your name, email address, phone number, address, photos, contacts, or any other personally identifiable information.
+- **Sensitive Information:** Your location data, financial and payment information, etc.
+- **Non-Personal Information:** Device information, usage statistics, crash reports, or any other data related to your interaction with the App.
 
 Since we do not collect any data, your information is never used, shared, or sold.
 

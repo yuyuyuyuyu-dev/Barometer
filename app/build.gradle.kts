@@ -12,7 +12,17 @@ plugins {
 
 detekt {
     buildUponDefaultConfig = true
-    config.setFrom(rootProject.file("detekt.yml"))
+}
+
+ktlint {
+    version = libs.versions.ktlintCli.get()
+    filter {
+        val buildPath =
+            layout.buildDirectory
+                .get()
+                .asFile.path + File.separator
+        exclude { it.file.path.startsWith(buildPath) }
+    }
 }
 
 // Release metadata injected by CI (see .github/workflows/release.yml).
@@ -34,12 +44,12 @@ fun versionNameToCode(name: String): Int {
 
 android {
     namespace = "dev.yuyuyuyuyu.barometer"
-    compileSdk = 37
+    compileSdk = providers.gradleProperty("sdk.compile").get().toInt()
 
     defaultConfig {
         applicationId = "dev.yuyuyuyuyu.barometer"
-        minSdk = 24
-        targetSdk = 37
+        minSdk = providers.gradleProperty("sdk.min").get().toInt()
+        targetSdk = providers.gradleProperty("sdk.target").get().toInt()
         versionCode = releaseVersionName?.let(::versionNameToCode) ?: 1
         versionName = releaseVersionName ?: "0.0.0"
 

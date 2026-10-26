@@ -20,14 +20,19 @@ class BarometerPresenter(
         return BarometerScreen.State(
             barometerState =
                 when (val pressureState = barometricPressureState) {
-                    BarometricPressureState.Loading -> BarometerState.Loading
+                    BarometricPressureState.Loading -> {
+                        BarometerState.Loading
+                    }
 
-                    is BarometricPressureState.Success ->
+                    is BarometricPressureState.Success -> {
                         BarometerState.SuccessToGetPressure(
                             pressure = formatPressureUseCase(pressure = pressureState.pressure),
                         )
+                    }
 
-                    is BarometricPressureState.Failure -> BarometerState.DeviceDoesNotHaveBarometricSensor
+                    is BarometricPressureState.Failure -> {
+                        BarometerState.DeviceDoesNotHaveBarometricSensor
+                    }
                 },
         )
     }

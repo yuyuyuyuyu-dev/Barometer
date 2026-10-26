@@ -7,7 +7,7 @@ composeBom = "2026.09.00"
 coreKtx = "1.19.1"
 coroutineTest = "1.11.0"
 createTypography = "0.2.0"
-detekt = "1.23.8"
+detekt = "2.0.0-alpha.6"
 espressoCore = "3.7.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
@@ -15,6 +15,7 @@ koin = "4.2.2"
 kotlin = "2.4.21"
 kotlinxSerializationJson = "1.12.0"
 ktlint = "14.2.0"
+ktlintCli = "1.8.0"
 lifeCycleViewmodelCompose = "2.11.0"
 lifecycleRuntimeKtx = "2.11.0"
 result = "2.3.1"
@@ -47,6 +48,7 @@ koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutineTest" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlintCli" }
 mikepenz-aboutlibraries-compose = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "aboutLibraries" }
 mikepenz-aboutlibraries-core = { module = "com.mikepenz:aboutlibraries-core", version.ref = "aboutLibraries" }
 result = { module = "com.michael-bull.kotlin-result:kotlin-result", version.ref = "result" }
@@ -58,7 +60,7 @@ yuyuyuyuyu-simpletopappbar = { module = "dev.yuyuyuyuyu:simpletopappbar", versio
 [plugins]
 aboutlibraries = { id = "com.mikepenz.aboutlibraries.plugin.android", version.ref = "aboutLibraries" }
 android-application = { id = "com.android.application", version.ref = "agp" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+detekt = { id = "dev.detekt", version.ref = "detekt" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
