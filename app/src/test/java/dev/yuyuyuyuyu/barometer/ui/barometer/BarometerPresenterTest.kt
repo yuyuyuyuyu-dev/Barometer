@@ -95,9 +95,7 @@ class BarometerPresenterTest {
      * so a break anywhere along that chain fails these tests.
      */
     @OptIn(ExperimentalCoroutinesApi::class)
-    private suspend fun TestScope.testPresenter(
-        block: suspend CircuitReceiveTurbine<BarometerScreen.State>.() -> Unit,
-    ) {
+    private suspend fun TestScope.testPresenter(body: suspend CircuitReceiveTurbine<BarometerScreen.State>.() -> Unit) {
         val lifecycleOwner =
             TestLifecycleOwner(
                 initialState = Lifecycle.State.RESUMED,
@@ -113,7 +111,7 @@ class BarometerPresenterTest {
                     ),
             )
 
-        presenterTestOf({ withLifecycleOwner(lifecycleOwner) { presenter.present() } }, block = block)
+        presenterTestOf({ withLifecycleOwner(lifecycleOwner) { presenter.present() } }, block = body)
     }
 }
 

@@ -30,10 +30,17 @@ fun Barometer(
     Text(
         text =
             when (state.barometerState) {
-                is BarometerState.SuccessToGetPressure -> state.barometerState.pressure
-                is BarometerState.DeviceDoesNotHaveBarometricSensor ->
+                is BarometerState.SuccessToGetPressure -> {
+                    state.barometerState.pressure
+                }
+
+                is BarometerState.DeviceDoesNotHaveBarometricSensor -> {
                     stringResource(R.string.device_does_not_have_barometric_sensor_error)
-                is BarometerState.Loading -> stringResource(R.string.loading)
+                }
+
+                is BarometerState.Loading -> {
+                    stringResource(R.string.loading)
+                }
             },
         style = MaterialTheme.typography.displaySmall,
     )
@@ -41,7 +48,7 @@ fun Barometer(
 
 @Preview
 @Composable
-private fun BarometerPreview(
+fun BarometerPreview(
     @PreviewParameter(BarometerPreviewParameterProvider::class) state: BarometerScreen.State,
 ) {
     Barometer(state)

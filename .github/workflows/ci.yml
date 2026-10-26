@@ -7,43 +7,24 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
-# Every job below is independent, so a superseded push would otherwise leave up to
-# eight stale jobs occupying the concurrency limit. Pushes to main are left alone so
-# that every commit there stays verified.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
+permissions: {}
+
 jobs:
-  ktlint:
-    name: ktlint
-    runs-on: ubuntu-latest
+  oxfmt:
+    name: Oxfmt
     permissions:
       contents: read
-    steps:
-      - name: Clone Repository
-        uses: actions/checkout@v7
+    uses: yuyuyuyuyu-dev/repo-config/.github/workflows/oxfmt.yml@main
 
-      - name: Setup build
-        uses: ./.github/actions/setup-build
-
-      - name: Check formatting
-        run: ./gradlew ktlintCheck
-
-  detekt:
-    name: Detekt
-    runs-on: ubuntu-latest
+  kotlin-lint:
+    name: Kotlin lint
     permissions:
       contents: read
-    steps:
-      - name: Clone Repository
-        uses: actions/checkout@v7
-
-      - name: Setup build
-        uses: ./.github/actions/setup-build
-
-      - name: Check for code smells
-        run: ./gradlew detekt
+    uses: yuyuyuyuyu-dev/repo-config/.github/workflows/kotlin-lint.yml@main
 
   android-lint:
     name: Android Lint
@@ -54,8 +35,8 @@ jobs:
       - name: Clone Repository
         uses: actions/checkout@v7
 
-      - name: Setup build
-        uses: ./.github/actions/setup-build
+      - name: Set up the JDK and Gradle
+        uses: yuyuyuyuyu-dev/repo-config/.github/actions/setup-jdk-and-gradle@main
 
       - name: Check for Android issues
         run: ./gradlew lintDebug
@@ -67,25 +48,6 @@ jobs:
           name: lint-report
           path: app/build/reports/lint-results-debug.html
           if-no-files-found: ignore
-
-  version-catalog:
-    name: Version catalog
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Clone Repository
-        uses: actions/checkout@v7
-
-      - name: Setup build
-        uses: ./.github/actions/setup-build
-
-      # versionCatalogFormat rewrites the file in place, so a non-empty diff means
-      # the committed catalog was not formatted.
-      - name: Check the version catalog is formatted
-        run: |
-          ./gradlew versionCatalogFormat
-          git diff --exit-code gradle/libs.versions.toml
 
   actionlint:
     name: actionlint
@@ -112,8 +74,8 @@ jobs:
       - name: Clone Repository
         uses: actions/checkout@v7
 
-      - name: Setup build
-        uses: ./.github/actions/setup-build
+      - name: Set up the JDK and Gradle
+        uses: yuyuyuyuyu-dev/repo-config/.github/actions/setup-jdk-and-gradle@main
 
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest
@@ -135,8 +97,8 @@ jobs:
       - name: Clone Repository
         uses: actions/checkout@v7
 
-      - name: Setup build
-        uses: ./.github/actions/setup-build
+      - name: Set up the JDK and Gradle
+        uses: yuyuyuyuyu-dev/repo-config/.github/actions/setup-jdk-and-gradle@main
 
       # The instrumentation tests need a real barometer, so CI cannot run them.
       # Assembling them at least keeps them compiling against the current dependencies.
@@ -152,8 +114,8 @@ jobs:
       - name: Clone Repository
         uses: actions/checkout@v7
 
-      - name: Setup build
-        uses: ./.github/actions/setup-build
+      - name: Set up the JDK and Gradle
+        uses: yuyuyuyuyu-dev/repo-config/.github/actions/setup-jdk-and-gradle@main
 
       # The same task release.yml publishes with. Without the signing environment
       # variables it falls back to the debug key, so the R8 pipeline that a release
