@@ -6,41 +6,44 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
-import com.slack.circuit.backstack.rememberSaveableBackStack
-import com.slack.circuit.foundation.CircuitCompositionLocals
-import com.slack.circuit.foundation.NavigableCircuitContent
-import com.slack.circuit.foundation.rememberCircuitNavigator
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
+import androidx.navigation3.ui.NavDisplay
 import dev.yuyuyuyuyu.barometer.R
-import dev.yuyuyuyuyu.barometer.ui.barometer.BarometerScreen
-import dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList.OpenSourceLicenseListScreen
+import dev.yuyuyuyuyu.barometer.ui.barometer.Barometer
+import dev.yuyuyuyuyu.barometer.ui.barometer.BarometerRoute
+import dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList.OpenSourceLicenseList
+import dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList.OpenSourceLicenseListRoute
 import dev.yuyuyuyuyu.barometer.ui.theme.BarometerTheme
 import dev.yuyuyuyuyu.simpleTopAppBar.SimpleTopAppBar
-import org.koin.compose.koinInject
 
 @Composable
 fun BarometerApp() {
-    val backStack = rememberSaveableBackStack(root = BarometerScreen)
-    val navigator = rememberCircuitNavigator(backStack)
+    val backStack = rememberNavBackStack(BarometerRoute)
 
     val uriHandler = LocalUriHandler.current
 
     BarometerTheme {
         Scaffold(
             topBar = {
-                val currentScreen = backStack.topRecord?.screen
+                val currentRoute = backStack.lastOrNull()
 
                 SimpleTopAppBar(
                     title =
                         stringResource(
-                            when (currentScreen) {
-                                is OpenSourceLicenseListScreen -> R.string.open_source_licenses
+                            when (currentRoute) {
+                                is OpenSourceLicenseListRoute -> R.string.open_source_licenses
                                 else -> R.string.app_name
                             },
                         ),
                     navigateBackIsPossible = backStack.size > 1,
-                    onNavigateBackButtonClick = { navigator.pop() },
+                    onNavigateBackButtonClick = { backStack.removeLastOrNull() },
                     onOpenSourceLicensesButtonClick = {
-                        navigator.goTo(OpenSourceLicenseListScreen)
+                        if (currentRoute != OpenSourceLicenseListRoute) {
+                            backStack.add(OpenSourceLicenseListRoute)
+                        }
                     },
                     onSourceCodeButtonClick = {
                         uriHandler.openUri("https://github.com/yuyuyuyuyu-dev/Barometer")
@@ -48,13 +51,21 @@ fun BarometerApp() {
                 )
             },
         ) { innerPadding ->
-            CircuitCompositionLocals(koinInject()) {
-                NavigableCircuitContent(
-                    navigator = navigator,
-                    backStack = backStack,
-                    modifier = Modifier.padding(innerPadding),
-                )
-            }
+            NavDisplay(
+                backStack = backStack,
+                modifier = Modifier.padding(innerPadding),
+                onBack = { backStack.removeLastOrNull() },
+                entryDecorators =
+                    listOf(
+                        rememberSaveableStateHolderNavEntryDecorator(),
+                        rememberViewModelStoreNavEntryDecorator(),
+                    ),
+                entryProvider =
+                    entryProvider {
+                        entry<BarometerRoute> { Barometer() }
+                        entry<OpenSourceLicenseListRoute> { OpenSourceLicenseList() }
+                    },
+            )
         }
     }
 }
