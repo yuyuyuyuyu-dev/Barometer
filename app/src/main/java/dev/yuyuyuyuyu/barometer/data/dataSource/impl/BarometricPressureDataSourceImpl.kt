@@ -34,6 +34,7 @@ class BarometricPressureDataSourceImpl(
                                     .appendTrace(TraceInfo.getCurrent()),
                         ),
                 )
+                close()
 
                 return@callbackFlow
             }
