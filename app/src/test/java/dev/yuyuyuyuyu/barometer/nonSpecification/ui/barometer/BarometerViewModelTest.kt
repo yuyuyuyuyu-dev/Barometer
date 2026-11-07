@@ -1,13 +1,14 @@
-package dev.yuyuyuyuyu.barometer.ui.barometer
+package dev.yuyuyuyuyu.barometer.nonSpecification.ui.barometer
 
 import app.cash.turbine.test
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
-import dev.yuyuyuyuyu.barometer.data.dataSource.fake.FakeBarometricPressureDataSource
 import dev.yuyuyuyuyu.barometer.data.error.BarometricPressureError
 import dev.yuyuyuyuyu.barometer.data.repository.impl.BarometricPressureRepositoryImpl
 import dev.yuyuyuyuyu.barometer.domain.useCase.impl.FormatPressureUseCaseImpl
-import dev.yuyuyuyuyu.barometer.testRule.MainDispatcherRule
+import dev.yuyuyuyuyu.barometer.nonSpecification.data.dataSource.fake.FakeBarometricPressureDataSource
+import dev.yuyuyuyuyu.barometer.nonSpecification.testRule.MainDispatcherRule
+import dev.yuyuyuyuyu.barometer.ui.barometer.BarometerViewModel
 import dev.yuyuyuyuyu.barometer.ui.barometer.model.BarometerState
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest

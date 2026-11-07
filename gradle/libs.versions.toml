@@ -19,7 +19,9 @@ lifeCycleViewmodelCompose = "2.11.0"
 lifecycleRuntimeKtx = "2.11.0"
 navigation3 = "1.2.1"
 result = "2.3.1"
+robolectric = "4.17"
 simpleTopAppBar = "0.4.0"
+testCore = "1.7.0"
 timber = "5.0.1"
 turbine = "1.2.1"
 versionCatalogUpdate = "1.1.2"
@@ -36,6 +38,7 @@ androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecy
 androidx-material3 = { module = "androidx.compose.material3:material3" }
 androidx-navigation3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "navigation3" }
 androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "navigation3" }
+androidx-test-core-ktx = { module = "androidx.test:core-ktx", version.ref = "testCore" }
 androidx-ui = { module = "androidx.compose.ui:ui" }
 androidx-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
 androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
@@ -53,6 +56,7 @@ ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlint
 mikepenz-aboutlibraries-compose = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "aboutLibraries" }
 mikepenz-aboutlibraries-core = { module = "com.mikepenz:aboutlibraries-core", version.ref = "aboutLibraries" }
 result = { module = "com.michael-bull.kotlin-result:kotlin-result", version.ref = "result" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 yuyuyuyuyu-createtypography = { module = "dev.yuyuyuyuyu:createtypography", version.ref = "createTypography" }

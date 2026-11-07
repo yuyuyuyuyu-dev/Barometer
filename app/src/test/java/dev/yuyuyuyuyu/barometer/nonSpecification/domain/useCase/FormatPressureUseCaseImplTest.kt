@@ -1,4 +1,4 @@
-package dev.yuyuyuyuyu.barometer.domain.useCase
+package dev.yuyuyuyuyu.barometer.nonSpecification.domain.useCase
 
 import dev.yuyuyuyuyu.barometer.domain.useCase.impl.FormatPressureUseCaseImpl
 import kotlinx.coroutines.test.runTest
