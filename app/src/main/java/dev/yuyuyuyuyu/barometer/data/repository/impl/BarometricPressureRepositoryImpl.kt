@@ -9,8 +9,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
-// Keeps the sensor subscription alive across short-lived unsubscriptions such as a
-// configuration change, so the sensor is not torn down and re-registered needlessly.
 private const val STOP_TIMEOUT_MILLIS = 5_000L
 
 class BarometricPressureRepositoryImpl(

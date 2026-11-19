@@ -100,8 +100,6 @@ jobs:
       - name: Set up the JDK and Gradle
         uses: yuyuyuyuyu-dev/repo-config/.github/actions/setup-jdk-and-gradle@main
 
-      # The instrumentation tests need a real barometer, so CI cannot run them.
-      # Assembling them at least keeps them compiling against the current dependencies.
       - name: Build the instrumentation test APK
         run: ./gradlew assembleDebugAndroidTest
 
@@ -117,8 +115,5 @@ jobs:
       - name: Set up the JDK and Gradle
         uses: yuyuyuyuyu-dev/repo-config/.github/actions/setup-jdk-and-gradle@main
 
-      # The same task release.yml publishes with. Without the signing environment
-      # variables it falls back to the debug key, so the R8 pipeline that a release
-      # depends on is exercised here without any secrets.
       - name: Build the release bundle
         run: ./gradlew bundleRelease
