@@ -58,10 +58,6 @@ jobs:
       - name: Clone Repository
         uses: actions/checkout@v7
 
-      # actionlint ships no action of its own, and Dependabot cannot see through the
-      # `docker://` form its docs suggest, so that version would have gone stale
-      # unnoticed. This wrapper is a plain action reference Dependabot can bump, and
-      # it resolves the actionlint release itself at run time.
       - name: Check workflow files
         uses: raven-actions/actionlint@v2
 
