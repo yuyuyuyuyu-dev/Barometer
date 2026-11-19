@@ -25,15 +25,9 @@ ktlint {
     }
 }
 
-// Release metadata injected by CI (see .github/workflows/release.yml).
-// All are null for local builds, which then fall back to debug signing and the
-// hardcoded version below.
 val releaseVersionName: String? = System.getenv("VERSION_NAME")
 val releaseKeystoreFile: String? = System.getenv("KEYSTORE_FILE")
 
-// Maps a semantic version name to a strictly increasing Int versionCode.
-// minor and patch each occupy 3 digits (0..999); major can go up to 2099
-// before exceeding Google Play's 2,100,000,000 limit.
 fun versionNameToCode(name: String): Int {
     val parts = name.split(".")
     require(parts.size == 3) { "VERSION_NAME must be MAJOR.MINOR.PATCH, but was: $name" }
