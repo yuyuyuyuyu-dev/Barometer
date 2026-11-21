@@ -90,12 +90,12 @@ class BarometerAppTest {
         ActivityScenario.launch(MainActivity::class.java)
 
         // Act
-        composeRule.onNodeWithContentDescription("menu").performClick()
+        composeRule.onNodeWithContentDescription("More options").performClick()
         composeRule.onNodeWithText("Open source licenses").performClick()
 
         // Assert
         composeRule.onNodeWithText("Open source licenses").assertExists()
-        composeRule.onNodeWithContentDescription("navigate back").assertExists()
+        composeRule.onNodeWithContentDescription("Back").assertExists()
         composeRule.onNodeWithText("Loading...").assertDoesNotExist()
     }
 
@@ -104,16 +104,16 @@ class BarometerAppTest {
         // Arrange
         sensorManager.addSensor(sensor)
         ActivityScenario.launch(MainActivity::class.java)
-        composeRule.onNodeWithContentDescription("menu").performClick()
+        composeRule.onNodeWithContentDescription("More options").performClick()
         composeRule.onNodeWithText("Open source licenses").performClick()
 
         // Act
-        composeRule.onNodeWithContentDescription("navigate back").performClick()
+        composeRule.onNodeWithContentDescription("Back").performClick()
 
         // Assert
         composeRule.onNodeWithText("Barometer").assertExists()
         composeRule.onNodeWithText("Loading...").assertExists()
-        composeRule.onNodeWithContentDescription("navigate back").assertDoesNotExist()
+        composeRule.onNodeWithContentDescription("Back").assertDoesNotExist()
     }
 
     @Test
@@ -121,7 +121,7 @@ class BarometerAppTest {
         // Arrange
         sensorManager.addSensor(sensor)
         val scenario = ActivityScenario.launch(MainActivity::class.java)
-        composeRule.onNodeWithContentDescription("menu").performClick()
+        composeRule.onNodeWithContentDescription("More options").performClick()
         composeRule.onNodeWithText("Open source licenses").performClick()
 
         // Act
@@ -130,7 +130,7 @@ class BarometerAppTest {
 
         // Assert
         composeRule.onNodeWithText("Open source licenses").assertExists()
-        composeRule.onNodeWithContentDescription("navigate back").assertExists()
+        composeRule.onNodeWithContentDescription("Back").assertExists()
     }
 
     @Test
@@ -140,7 +140,7 @@ class BarometerAppTest {
         ActivityScenario.launch(MainActivity::class.java)
 
         // Act
-        composeRule.onNodeWithContentDescription("menu").performClick()
+        composeRule.onNodeWithContentDescription("More options").performClick()
         composeRule.onNodeWithText("Source code").performClick()
 
         // Assert

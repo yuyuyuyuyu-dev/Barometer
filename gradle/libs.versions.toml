@@ -5,7 +5,6 @@ agp = "9.5.1"
 composeBom = "2026.09.00"
 coreKtx = "1.19.1"
 coroutineTest = "1.11.0"
-createTypography = "0.2.1"
 detekt = "2.0.0-alpha.6"
 espressoCore = "3.7.0"
 junit = "4.13.2"
@@ -17,10 +16,10 @@ ktlint = "14.2.0"
 ktlintCli = "1.8.0"
 lifeCycleViewmodelCompose = "2.11.0"
 lifecycleRuntimeKtx = "2.11.0"
+myComposables = "0.1.2"
 navigation3 = "1.2.1"
 result = "2.3.1"
 robolectric = "4.18.1"
-simpleTopAppBar = "0.4.0"
 testCore = "1.7.0"
 timber = "5.0.1"
 turbine = "1.2.1"
@@ -59,8 +58,7 @@ result = { module = "com.michael-bull.kotlin-result:kotlin-result", version.ref 
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
-yuyuyuyuyu-createtypography = { module = "dev.yuyuyuyuyu:createtypography", version.ref = "createTypography" }
-yuyuyuyuyu-simpletopappbar = { module = "dev.yuyuyuyuyu:simpletopappbar", version.ref = "simpleTopAppBar" }
+yuyuyuyuyu-mycomposables = { module = "dev.yuyuyuyuyu:my-composables", version.ref = "myComposables" }
 
 [plugins]
 aboutlibraries = { id = "com.mikepenz.aboutlibraries.plugin.android", version.ref = "aboutLibraries" }

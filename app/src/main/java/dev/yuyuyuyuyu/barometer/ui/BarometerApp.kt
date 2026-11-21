@@ -16,8 +16,8 @@ import dev.yuyuyuyuyu.barometer.ui.barometer.Barometer
 import dev.yuyuyuyuyu.barometer.ui.barometer.BarometerRoute
 import dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList.OpenSourceLicenseList
 import dev.yuyuyuyuyu.barometer.ui.openSourceLicenseList.OpenSourceLicenseListRoute
-import dev.yuyuyuyuyu.barometer.ui.theme.BarometerTheme
-import dev.yuyuyuyuyu.simpleTopAppBar.SimpleTopAppBar
+import dev.yuyuyuyuyu.mycomposables.MyMaterialDynamicTheme
+import dev.yuyuyuyuyu.mycomposables.SimpleTopAppBar
 
 @Composable
 fun BarometerApp() {
@@ -25,7 +25,7 @@ fun BarometerApp() {
 
     val uriHandler = LocalUriHandler.current
 
-    BarometerTheme {
+    MyMaterialDynamicTheme {
         Scaffold(
             topBar = {
                 val currentRoute = backStack.lastOrNull()
