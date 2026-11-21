@@ -1,10 +1,5 @@
 name: Release
 
-# Publishing a GitHub Release (with a vMAJOR.MINOR.PATCH tag) builds a signed
-# App Bundle and uploads it to Google Play's internal testing track.
-#
-# Deliberately no workflow_dispatch: a release should only ever come from publishing
-# a release, never from someone re-running this by hand.
 on:
   release:
     types: [published]

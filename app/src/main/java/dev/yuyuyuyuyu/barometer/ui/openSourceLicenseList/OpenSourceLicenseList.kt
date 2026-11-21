@@ -18,8 +18,6 @@ fun OpenSourceLicenseList(modifier: Modifier = Modifier) {
                 libraries?.copy(libraries = it)
             },
         modifier = modifier,
-        // AboutLibraries 15 replaced the individual show* flags with a badge set,
-        // whose defaults show everything here except the description.
         badges = LibraryBadges(description = true),
     )
 }

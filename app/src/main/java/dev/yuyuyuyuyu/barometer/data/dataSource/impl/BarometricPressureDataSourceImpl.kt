@@ -50,15 +50,13 @@ class BarometricPressureDataSourceImpl(
                     override fun onAccuracyChanged(
                         sensor: Sensor?,
                         accuracy: Int,
-                    ) {
-                        // NOOP
-                    }
+                    ) = Unit
                 }
 
             sensorManager.registerListener(
-                listener, // listener: android.hardware.SensorEventListener
-                barometricPressureSensor, // sensor: android.hardware.Sensor
-                SensorManager.SENSOR_DELAY_NORMAL, // samplingPeriodUs: int
+                listener,
+                barometricPressureSensor,
+                SensorManager.SENSOR_DELAY_NORMAL,
             )
 
             awaitClose {
