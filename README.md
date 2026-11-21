@@ -1,6 +1,11 @@
 # Barometer
 
-[![Tests](https://github.com/yuyuyuyuyu-dev/Barometer/actions/workflows/tests.yml/badge.svg)](https://github.com/yuyuyuyuyu-dev/Barometer/actions/workflows/tests.yml)
+[![CI](https://github.com/yuyuyuyuyu-dev/Barometer/actions/workflows/ci.yml/badge.svg)](https://github.com/yuyuyuyuyu-dev/Barometer/actions/workflows/ci.yml)
+[![Release](https://github.com/yuyuyuyuyu-dev/Barometer/actions/workflows/release.yml/badge.svg)](https://github.com/yuyuyuyuyu-dev/Barometer/actions/workflows/release.yml)
+[![GitHub Release](https://img.shields.io/github/v/release/yuyuyuyuyu-dev/Barometer)](https://github.com/yuyuyuyuyu-dev/Barometer/releases/latest)
+[![License](https://img.shields.io/github/license/yuyuyuyuyu-dev/Barometer)](LICENSE)
+[![Kotlin](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fyuyuyuyuyu-dev%2FBarometer%2Fmain%2Fgradle%2Flibs.versions.toml&query=%24.versions.kotlin&label=Kotlin&logo=kotlin)](gradle/libs.versions.toml)
+[![Compose BOM](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fyuyuyuyuyu-dev%2FBarometer%2Fmain%2Fgradle%2Flibs.versions.toml&query=%24.versions.composeBom&label=Compose%20BOM&logo=jetpackcompose)](gradle/libs.versions.toml)
 
 A simple Android app that captures and displays real-time barometric pressure readings from the device's sensor.
 
