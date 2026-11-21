@@ -102,11 +102,10 @@ kotlin {
 
 dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.yuyuyuyuyu.createtypography)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.mikepenz.aboutlibraries.core)
     implementation(libs.mikepenz.aboutlibraries.compose)
-    implementation(libs.yuyuyuyuyu.simpletopappbar)
+    implementation(libs.yuyuyuyuyu.mycomposables)
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
