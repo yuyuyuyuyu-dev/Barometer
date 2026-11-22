@@ -38,7 +38,12 @@ fun versionNameToCode(name: String): Int {
 
 android {
     namespace = "dev.yuyuyuyuyu.barometer"
-    compileSdk = providers.gradleProperty("sdk.compile").get().toInt()
+    compileSdk {
+        version =
+            release(providers.gradleProperty("sdk.compile").get().toInt()) {
+                minorApiLevel = providers.gradleProperty("sdk.compile.minor").get().toInt()
+            }
+    }
 
     defaultConfig {
         applicationId = "dev.yuyuyuyuyu.barometer"
